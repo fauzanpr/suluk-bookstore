@@ -69,7 +69,8 @@
 
 
             <li class="profile">
-                <div class="profile-details">
+                <div class="profile-details"  data-bs-toggle="modal"
+                data-bs-target="#editprofil">
                     <img src="img/profile.png" alt="pp" />
                     <div class="name_job">
                         <div class="name">Fauzan Pradana</div>
@@ -86,12 +87,50 @@
         @yield('content')
     </section>
 
+    {{-- modal edit profile --}}
+    <form action="" method="post" enctype="multipart/form">
+        <div class="modal fade" id="editprofil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+            <div class="modal-dialog modal-dialog-scrollable">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="staticBackdropLabel">Edit Profile</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="{{ asset('admin/img/logo.jpeg') }}" class="rounded mx-auto d-block img-fluid mt-4 mb-2" alt="..." style="max-width: 200px;">
+                    <div class="form-floating mb-3">
+                        <input type="file" class="form-control" id="floatingInput" name="profil_admin">
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" name="nama_admin" value="Fauzan Pradana">
+                        <label for="floatingInput">Nama</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" name="noHp_admin" value="089620457389">
+                        <label for="floatingInput">Nomor Handphone</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" name="email_admin" value="fauzanpr@gmail.com">
+                        <label for="floatingInput">Email</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" name="password_admin" value="Ykuch1rpZ^d">
+                        <label for="floatingInput">Password</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-success">SIMPAN</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </form>
+    {{-- end modal --}}
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
 
-    <!-- custom js -->
-    <script src="script.js"></script>
 
     <!-- Custom js for DASHBOARD ADMIN -->
     <script src="{{ asset('admin/admin.js') }}"></script>
