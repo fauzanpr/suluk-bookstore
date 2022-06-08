@@ -14,5 +14,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('admin.layout.masterlayout');
 });
+
+// ROUTE FOR ADMIN
+Route::get('/dashboard', function () {
+    return view('admin.dashboard', ['title' => 'dashboard']);
+})->name('dashboard');
+Route::get('/kelolabuku', function () {
+    return view('admin.kelolabuku', ['title' => 'kelolabuku']);
+})->name('kelolabuku');
+Route::get('/kelolapelanggan', function () {
+    return view('admin.kelolapelanggan', ['title' => 'kelolapelanggan']);
+})->name('kelolapelanggan');
+Route::get('/kelolatransaksi', function () {
+    return view('admin.kelolatransaksi', ['title' => 'kelolatransaksi']);
+})->name('kelolatransaksi');
