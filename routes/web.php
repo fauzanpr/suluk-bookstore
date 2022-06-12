@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.layout.masterlayout');
+    return view('landingpage');
 });
 
 // ROUTE FOR ADMIN
