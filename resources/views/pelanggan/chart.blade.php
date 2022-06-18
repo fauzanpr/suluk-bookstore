@@ -13,12 +13,12 @@
                     <table class="table-shopping-cart">
                         <tr class="table_head">
                             <th style="width: 50px;"></th>
-                            <th class="column-1">Product</th>
+                            <th class="column-1">Buku</th>
                             <th class="column-2"></th>
-                            <th class="column-3">Price</th>
-                            <th class="column-4 text-center">Qty</th>
+                            <th class="column-3">Harga</th>
+                            <th class="column-4 text-center">Item</th>
                             <th class="column-5">Total</th>
-                            <th class="column-5">Action</th>
+                            <th class="column-5">Aksi</th>
                         </tr>
 
                         {{-- chart item --}}
