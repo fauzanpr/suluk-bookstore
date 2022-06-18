@@ -51,7 +51,7 @@
 		<!-- Header desktop -->
 		<div class="container-menu-desktop">
 
-			<div class="wrap-menu-desktop">
+			<div class="wrap-menu-desktop" style="position: fixed; top:0">
 				<nav class="limiter-menu-desktop container">
 					
 					<!-- Logo desktop -->		
