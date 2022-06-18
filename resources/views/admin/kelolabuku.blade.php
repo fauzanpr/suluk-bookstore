@@ -101,6 +101,24 @@
                                 name="harga">
                         </div>
                     </div>
+                    <div class="mb-3 row">
+                        <label for="stokf" class="col-sm-5 col-form-label">Stock</label>
+                        <div class="col-sm-7">
+                            <input type="number" class="form-control form-control-sm" id="stokf" required
+                                name="stok">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="hargaf" class="col-sm-5 col-form-label">Kategori</label>
+                        <div class="col-sm-7">
+                            <select class="form-select" aria-label="Default select example" name="id_kategori" required>
+                                <option selected> -- pilih kategori -- </option>
+                                <option value="1">Novel</option>
+                                <option value="2">Pengetahuan</option>
+                                <option value="3">Agama</option>
+                              </select>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-success">SIMPAN</button>
@@ -157,6 +175,18 @@
                                     <label for="hargaf" class="col-sm-5 col-form-label">harga</label>
                                     <div class="col-sm-7">
                                         <p>97000</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="stokf" class="col-sm-5 col-form-label">Stock</label>
+                                    <div class="col-sm-7">
+                                        <p>10</p>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label for="kategorif" class="col-sm-5 col-form-label">kategori</label>
+                                    <div class="col-sm-7">
+                                        <p>Agama</p>
                                     </div>
                                 </div>
                             </div>
@@ -230,6 +260,23 @@
                                         <div class="col-sm-7">
                                             <input type="text" class="form-control form-control-sm" id="hargaf"
                                                 required name="harga" value="97000">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="stokf" class="col-sm-5 col-form-label">Stock</label>
+                                        <div class="col-sm-7">
+                                            <input type="number" class="form-control form-control-sm" id="stokf" required
+                                                name="stok" value="3">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="hargaf" class="col-sm-5 col-form-label">Kategori</label>
+                                        <div class="col-sm-7">
+                                            <select class="form-select" aria-label="Default select example" name="id_kategori" required>
+                                                <option value="1">Novel</option>
+                                                <option value="2" selected>Pengetahuan</option>
+                                                <option value="3">Agama</option>
+                                              </select>
                                         </div>
                                     </div>
                                 </div>
