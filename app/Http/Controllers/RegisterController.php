@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Hash;
@@ -12,11 +12,12 @@ class RegisterController extends Controller
 {
     public function store(Request $request) {
         $validated_data = $request->validate([
-            'customer_email' => 'required|email',
-            'customer_password' => 'required'
+            'name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required'
         ]);
-        $validated_data['customer_password'] = Hash::make($validated_data['customer_password']);
-        Customer::create($validated_data);
-        return redirect('/homepage');
+        $validated_data['password'] = Hash::make($validated_data['password']);
+        User::create($validated_data);
+        return redirect('/');
     }
 }

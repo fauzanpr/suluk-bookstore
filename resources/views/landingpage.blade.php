@@ -43,6 +43,13 @@
 
 <body class="animsition">
 
+    {{-- @if (session()->has('loginError'))
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Login Failed</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif --}}
+
     <!-- Header -->
     <header>
         <!-- Header desktop -->
@@ -144,7 +151,8 @@
         </form>
 
         <!-- modal login pelanggan -->
-        <form action="" method="post">
+        <form action="/login" method="post">
+            @csrf
             <div class="modal fade" id="loginpelanggan" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -158,12 +166,12 @@
                             <div class="container mb-3 mt-3">
                                 <div class="form-floating mb-3">
                                     <input type="email" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com" name="email_admin">
+                                        placeholder="name@example.com" name="email">
                                     <label for="floatingInput">Email address</label>
                                 </div>
                                 <div class="form-floating">
                                     <input type="password" class="form-control" id="floatingPassword"
-                                        placeholder="Password" name="password_admin">
+                                        placeholder="Password" name="password">
                                     <label for="floatingPassword">Password</label>
                                 </div>
                             </div>
@@ -190,16 +198,20 @@
                         </div>
                         <div class="modal-body" style="max-height:350px !important;">
                             <div class="container mb-3 mt-3">
-
+                                <div class="mb-3">
+                                    <label for="nama_pelanggan1" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="nama_pelanggan1"
+                                        placeholder="rafifzan" name="name" required>
+                                </div>
                                 <div class="mb-3">
                                     <label for="email_pelanggan1" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="email_pelanggan1"
-                                        placeholder="eg : name@gmail.com" name="customer_email" required>
+                                        placeholder="eg : name@gmail.com" name="email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password_pelanggan1" class="form-label">Password Akun</label>
                                     <input type="text" class="form-control" id="password_pelanggan1"
-                                        placeholder="eg : Sh8*Kmq" name="customer_password" required>
+                                        placeholder="eg : Sh8*Kmq" name="password" required>
                                 </div>
 
                             </div>
@@ -213,7 +225,6 @@
         </form>
 
     </header>
-
 
 
 
@@ -365,7 +376,7 @@
                                 <img src="images/product-01.jpg" alt="IMG-PRODUCT">
 
                                 <a href="/quickview/{{ $book->id }}"
-                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 {{--js-show-modal1--}}">
+                                    class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 {{-- js-show-modal1 --}}">
                                     Quick View
                                 </a>
                             </div>

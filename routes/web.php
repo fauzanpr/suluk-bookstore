@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
-use App\Http\Controllers\BukuController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Book;
 use Illuminate\Support\Facades\Route;
@@ -30,7 +30,7 @@ Route::get('/homepage', function () {
         'title' => 'homepage',
         'book' => Book::all()
     ]);
-})->name('homepage');
+})->name('homepage')->middleware('auth');
 Route::get('/chart', function () {
     return view('pelanggan.chart', ['title' => 'chart']);
 })->name('chart');
@@ -42,4 +42,6 @@ Route::get('/checkout', function () {
 })->name('checkout');
 
 // REGISTER ROUTE
-Route::post('/register', [RegisterController::class, 'store']);
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+
+Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');

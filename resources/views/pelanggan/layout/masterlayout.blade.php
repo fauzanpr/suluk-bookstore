@@ -135,7 +135,7 @@
 		                        <div class="mb-3">
 		                            <label for="nama_pelanggan1" class="form-label">Nama</label>
 		                            <input type="text" class="form-control" id="nama_pelanggan1"
-		                                placeholder="eg : hadi kusumo" name="nama_pelanggan">
+		                                placeholder="eg : hadi kusumo" name="nama_pelanggan" value="{{ auth()->user()->name }}">
 		                        </div>
 		                        <div class="mb-3">
 		                            <label for="noHP_pelanggan1" class="form-label">Nomor Ponsel</label>
@@ -145,7 +145,7 @@
 		                        <div class="mb-3">
 		                            <label for="email_pelanggan1" class="form-label">Email</label>
 		                            <input type="email" class="form-control" id="email_pelanggan1"
-		                                placeholder="eg : name@gmail.com" name="email_pelanggan">
+		                                placeholder="eg : name@gmail.com" name="email_pelanggan" value="{{ auth()->user()->email }}">
 		                        </div>
 		                        <div class="mb-3">
 		                            <label for="password_pelanggan1" class="form-label">Password Akun</label>
