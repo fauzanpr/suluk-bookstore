@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Models\Book;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [BookController::class, 'index']);
@@ -44,4 +46,8 @@ Route::get('/checkout', function () {
 // REGISTER ROUTE
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
 
+// LOGIN ROUTE
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+
+// LOGOUT ROUTE
+Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth');
