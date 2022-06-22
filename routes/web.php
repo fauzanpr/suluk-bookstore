@@ -1,21 +1,14 @@
 <?php
 
+use App\Http\Controllers\BookController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+Route::get('/', [BookController::class, 'index']);
 
-Route::get('/', function () {
-    return view('landingpage');
-});
+Route::get('/quickview/{book:id}', [BookController::class, 'show']);
 
 // ROUTE FOR ADMIN
 Route::get('/dashboard', function () {
@@ -33,8 +26,11 @@ Route::get('/kelolatransaksi', function () {
 
 // ROUTE FOR PELANGGAN
 Route::get('/homepage', function () {
-    return view('pelanggan.homepage', ['title' => 'homepage']);
-})->name('homepage');
+    return view('pelanggan.homepage', [
+        'title' => 'homepage',
+        'book' => Book::all()
+    ]);
+})->name('homepage')->middleware('auth');
 Route::get('/chart', function () {
     return view('pelanggan.chart', ['title' => 'chart']);
 })->name('chart');
@@ -44,3 +40,8 @@ Route::get('/transaction', function () {
 Route::get('/checkout', function () {
     return view('pelanggan.checkout', ['title' => 'checkout']);
 })->name('checkout');
+
+// REGISTER ROUTE
+Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
+
+Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
