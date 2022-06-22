@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BukuController;
+use App\Http\Controllers\RegisterController;
 use App\Models\Book;
 use Illuminate\Support\Facades\Route;
 
@@ -25,7 +26,10 @@ Route::get('/kelolatransaksi', function () {
 
 // ROUTE FOR PELANGGAN
 Route::get('/homepage', function () {
-    return view('pelanggan.homepage', ['title' => 'homepage']);
+    return view('pelanggan.homepage', [
+        'title' => 'homepage',
+        'book' => Book::all()
+    ]);
 })->name('homepage');
 Route::get('/chart', function () {
     return view('pelanggan.chart', ['title' => 'chart']);
@@ -36,3 +40,6 @@ Route::get('/transaction', function () {
 Route::get('/checkout', function () {
     return view('pelanggan.checkout', ['title' => 'checkout']);
 })->name('checkout');
+
+// REGISTER ROUTE
+Route::post('/register', [RegisterController::class, 'store']);

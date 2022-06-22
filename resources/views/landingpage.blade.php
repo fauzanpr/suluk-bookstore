@@ -177,7 +177,8 @@
         </form>
 
         <!-- modal Register pelanggan -->
-        <form action="" method="post">
+        <form action="/register" method="post">
+            @csrf
             <div class="modal fade" id="registrasipelanggan" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -193,12 +194,12 @@
                                 <div class="mb-3">
                                     <label for="email_pelanggan1" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="email_pelanggan1"
-                                        placeholder="eg : name@gmail.com" name="email_pelanggan">
+                                        placeholder="eg : name@gmail.com" name="customer_email" required>
                                 </div>
                                 <div class="mb-3">
                                     <label for="password_pelanggan1" class="form-label">Password Akun</label>
                                     <input type="text" class="form-control" id="password_pelanggan1"
-                                        placeholder="eg : Sh8*Kmq" name="password_pelanggan">
+                                        placeholder="eg : Sh8*Kmq" name="customer_password" required>
                                 </div>
 
                             </div>
@@ -356,7 +357,8 @@
 
             <div class="row isotope-grid">
                 @foreach ($books as $book)
-                    <div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $book->category->category_name }}">
+                    <div
+                        class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item {{ $book->category->category_name }}">
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-pic hov-img0">
