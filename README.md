@@ -28,9 +28,9 @@ php artisan key:generate
 ### Edit your .env
 You can edit your .env, such as DATABASE_NAME. Customize it corresponding your database name.
 
-### Migrate
+### Migrate and Seed
 ```
-php artisan migrate:fresh
+php artisan migrate:fresh --seed
 ```
 
 ### Run it :)
