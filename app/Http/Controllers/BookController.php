@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
     public function index() {
         return view('landingpage', [
-            'books' => Book::all()
+            'books' => Book::orderBy('id', 'asc')->paginate(8)
         ]);
     }
 
