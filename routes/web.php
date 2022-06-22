@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
@@ -33,9 +34,7 @@ Route::get('/homepage', function () {
         'book' => Book::all()
     ]);
 })->name('homepage')->middleware('auth');
-Route::get('/chart', function () {
-    return view('pelanggan.chart', ['title' => 'chart']);
-})->name('chart');
+Route::get('/chart', [ChartController::class, 'index'])->name('chart')->middleware('auth');
 Route::get('/transaction', function () {
     return view('pelanggan.transaction', ['title' => 'transaction']);
 })->name('transaction');
