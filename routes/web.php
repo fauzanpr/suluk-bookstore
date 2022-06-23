@@ -53,3 +53,6 @@ Route::post('/login', [LoginController::class, 'authenticate'])->middleware('gue
 
 // LOGOUT ROUTE
 Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth');
+
+// DELETE CHART
+Route::get('/delete/{id}', [ChartController::class, 'destroy']);

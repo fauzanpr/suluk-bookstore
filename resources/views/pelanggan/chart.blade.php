@@ -45,12 +45,19 @@
                                             data-bs-target="#editchartitem">
                                             <i class="las la-edit"></i>
                                         </button>
-                                        {{--delete--}}
-                                        <form action="">
+                                        {{-- delete --}}
+                                        {{-- <form action="/delete/{{ $item->id }}" method="post" class="d-inline">
+                                            @method('delete')
+                                            @csrf
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="las la-trash-alt"></i>
+                                            </button>
+                                        </form> --}}
+                                        <a href="/delete/{{ $item->id }}">
                                             <button type="button" class="btn btn-danger btn-sm">
                                                 <i class="las la-trash-alt"></i>
                                             </button>
-                                        </form>
+                                        </a>
                                     </td>
                                 </tr>
                                 {{-- chart item end --}}
