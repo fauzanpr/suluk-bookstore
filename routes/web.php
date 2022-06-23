@@ -11,7 +11,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 
 
-Route::get('/', [BookController::class, 'index']);
+Route::get('/', [BookController::class, 'index'])->middleware('guest');
 
 Route::get('/quickview/{book:id}', [BookController::class, 'show']);
 
@@ -39,10 +39,18 @@ Route::get('/homepage', function () {
 })->name('homepage')->middleware('auth');
 Route::get('/chart', [ChartController::class, 'index'])->name('chart')->middleware('auth');
 Route::get('/transaction', function () {
-    return view('pelanggan.transaction', ['title' => 'transaction']);
+    $data_get = BookUser::where('user_id', auth()->user()->id)->get();
+    return view('pelanggan.transaction', [
+        'title' => 'transaction',
+        'chart_count' => count($data_get)
+    ]);
 })->name('transaction');
 Route::get('/checkout', function () {
-    return view('pelanggan.checkout', ['title' => 'checkout']);
+    $data_get = BookUser::where('user_id', auth()->user()->id)->get();
+    return view('pelanggan.checkout', [
+        'title' => 'checkout',
+        'chart_count' => count($data_get)
+    ]);
 })->name('checkout');
 
 // REGISTER ROUTE
