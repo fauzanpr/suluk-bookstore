@@ -33,7 +33,7 @@
                                     <button class="btn btn-danger me-md-2 btn-sm" type="button" disabled>Gagal</button>
                                 @endif
 
-                                @if ($t->transaction_status == 'prosess')
+                                @if ($t->transaction_status == 'proses')
                                     <button class="btn btn-primary me-md-2 btn-sm" type="button" disabled>Proses</button>
                                 @endif
 

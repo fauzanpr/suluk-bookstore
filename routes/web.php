@@ -58,3 +58,5 @@ Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth');
 Route::get('/delete/{id}', [ChartController::class, 'destroy']);
 
 Route::post('/chart/checkout', [ChartController::class, 'checkout']);
+
+Route::post('/chart/add/{id}', [ChartController::class, 'add']);

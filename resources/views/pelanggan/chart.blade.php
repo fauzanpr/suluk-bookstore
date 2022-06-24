@@ -21,12 +21,15 @@
                                 <th class="column-5">Total</th>
                                 <th class="column-5">Aksi</th>
                             </tr>
+                            @php
+                                $i = 0;
+                            @endphp
                             @foreach ($chart_items as $item)
                                 {{-- chart item --}}
                                 <tr class="table_row">
                                     <td>
                                         <input class="text-center me-5" type="checkbox" value="{{ $item->id }}"
-                                            name="id[{{ $item->id }}]" aria-label="..."
+                                            name="id[{{ $i }}]" aria-label="..."
                                             style="width: 50px !important;">
                                     </td>
                                     <td>
@@ -64,6 +67,7 @@
                                 {{-- chart item end --}}
                                 @php
                                     $price_total += $total_price;
+                                    $i++;
                                 @endphp
                             @endforeach
                         </table>
