@@ -18,6 +18,7 @@
     <p>Kategori : {{ $book->category->category_name }}</p>
     <br>
     <a href="/">Kembali</a>
+
 </body>
 
 </html>

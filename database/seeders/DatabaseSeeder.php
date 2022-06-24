@@ -2,9 +2,13 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
-use App\Models\Category;
 use App\Models\Book;
+use App\Models\User;
+use App\Models\BookUser;
+use App\Models\Category;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -58,6 +62,100 @@ class DatabaseSeeder extends Seeder
             'publisher' => 'Mizan',
             'price' => 120000,
             'stock' => 11
+        ]);
+
+        Book::create([
+            'category_id' => 2,
+            'cover_photo' => 'product-01',
+            'isbn' => '163276832',
+            'title' => 'Thinking Rich',
+            'slug' => 'thinking-rich',
+            'author' => 'Josh Groban',
+            'publisher' => 'Mojok',
+            'price' => 120000,
+            'stock' => 11
+        ]);
+
+        Book::create([
+            'category_id' => 2,
+            'cover_photo' => 'product-01',
+            'isbn' => '163276832',
+            'title' => 'Thinking Rich',
+            'slug' => 'thinking-rich',
+            'author' => 'Josh Groban',
+            'publisher' => 'Mojok',
+            'price' => 120000,
+            'stock' => 11
+        ]);
+
+        Book::create([
+            'category_id' => 2,
+            'cover_photo' => 'product-01',
+            'isbn' => '163276832',
+            'title' => 'Thinking Rich',
+            'slug' => 'thinking-rich',
+            'author' => 'Josh Groban',
+            'publisher' => 'Mojok',
+            'price' => 120000,
+            'stock' => 11
+        ]);
+
+        Book::create([
+            'category_id' => 2,
+            'cover_photo' => 'product-01',
+            'isbn' => '163276832',
+            'title' => 'Thinking Rich',
+            'slug' => 'thinking-rich',
+            'author' => 'Josh Groban',
+            'publisher' => 'Mojok',
+            'price' => 120000,
+            'stock' => 11
+        ]);
+
+        Book::create([
+            'category_id' => 2,
+            'cover_photo' => 'product-01',
+            'isbn' => '163276832',
+            'title' => 'Thinking Rich',
+            'slug' => 'thinking-rich',
+            'author' => 'Josh Groban',
+            'publisher' => 'Mojok',
+            'price' => 120000,
+            'stock' => 11
+        ]);
+
+        Book::create([
+            'category_id' => 2,
+            'cover_photo' => 'product-01',
+            'isbn' => '163276832',
+            'title' => 'Thinking Rich',
+            'slug' => 'thinking-rich',
+            'author' => 'Josh Groban',
+            'publisher' => 'Mojok',
+            'price' => 120000,
+            'stock' => 11
+        ]);
+
+        User::create([
+            'name' => 'fauzan',
+            'email' => 'fauzanpr@gmail.com',
+            'password' => Hash::make('123')
+        ]);
+
+        BookUser::create([
+            'user_id' => 1,
+            'book_id' => 1,
+            'sub_item' => 2,
+            'sub_cost' => 250000,
+            'status' => 'keranjang'
+        ]);
+
+        BookUser::create([
+            'user_id' => 1,
+            'book_id' => 2,
+            'sub_item' => 1,
+            'sub_cost' => 115000,
+            'status' => 'keranjang'
         ]);
 
     }
