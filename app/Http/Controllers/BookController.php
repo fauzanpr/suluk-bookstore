@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Book;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -19,7 +22,9 @@ class BookController extends Controller
     {
         $buku = Book::with('category')->get();
         $categories = Category::all();
-        return view('landingpage', ['books' => $buku, 'categories' => $categories]);
+
+        $paginate = Book::orderBy('id', 'asc')->paginate(8);
+        return view('landingpage', ['books' => $paginate, 'categories' => $categories]);
     }
 
     public function tampil()

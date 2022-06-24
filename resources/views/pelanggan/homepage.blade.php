@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="layer-slick1 animated visible-false" data-appear="slideInUp" data-delay="1600">
-                                <a href="#"
+                                <a href="#shop"
                                     class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
                                     Shop Now
                                 </a>
@@ -64,7 +64,7 @@
                             </div>
 
                             <div class="layer-slick1 animated visible-false" data-appear="rotateIn" data-delay="1600">
-                                <a href="#"
+                                <a href="shop"
                                     class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04">
                                     Shop Now
                                 </a>
@@ -77,7 +77,7 @@
     </section>
 
     <!-- Product -->
-    <section class="bg0 p-t-23 p-b-140 mt-5">
+    <section class="bg0 p-t-23 p-b-140 mt-5" id='shop'>
         <div class="container">
             <div class="p-b-10">
                 <h3 class="ltext-103 cl5">
@@ -178,6 +178,7 @@
 
 
             </div>
+            {{ $book->links() }}
 
             <!-- Load more -->
             <div class="flex-c-m flex-w w-full p-t-45">
@@ -293,5 +294,5 @@
             </div>
         </div>
 
-    </form>
+    </form>z
 @endsection
