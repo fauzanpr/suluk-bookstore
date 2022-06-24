@@ -46,7 +46,7 @@
                 <span class="tooltip">Dashboard</span>
             </li>
             <li class="{{ $title == 'kelolabuku' ? 'active' : '' }}">
-                <a href="{{ route('kelolabuku') }}">
+                <a href="{{ route('kelolabuku.tampil') }}">
                     <i class="las la-book"></i>
                     <span class="links_name">Kelola Data Buku</span>
                 </a>

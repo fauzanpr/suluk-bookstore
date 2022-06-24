@@ -15,19 +15,26 @@ Route::get('/', [BookController::class, 'index'])->middleware('guest');
 
 Route::get('/quickview/{book:id}', [BookController::class, 'show']);
 
+
+
 // ROUTE FOR ADMIN
 Route::get('/dashboard', function () {
     return view('admin.dashboard', ['title' => 'dashboard']);
 })->name('dashboard');
-Route::get('/kelolabuku', function () {
-    return view('admin.kelolabuku', ['title' => 'kelolabuku']);
-})->name('kelolabuku');
+
+// kelola buku
+Route::get('/kelolabuku', [BookController::class, 'tampil'])->name('kelolabuku.tampil');
+Route::post('/kelolabuku', [BookController::class, 'store'])->name('kelolabuku.store');
+
 Route::get('/kelolapelanggan', function () {
     return view('admin.kelolapelanggan', ['title' => 'kelolapelanggan']);
 })->name('kelolapelanggan');
 Route::get('/kelolatransaksi', function () {
     return view('admin.kelolatransaksi', ['title' => 'kelolatransaksi']);
 })->name('kelolatransaksi');
+
+
+
 
 // ROUTE FOR PELANGGAN
 Route::get('/homepage', function () {
@@ -52,6 +59,8 @@ Route::get('/checkout', function () {
         'chart_count' => count($data_get)
     ]);
 })->name('checkout');
+
+
 
 // REGISTER ROUTE
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
