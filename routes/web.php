@@ -9,9 +9,12 @@ use App\Http\Controllers\ChartController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\HomepageController;
 
 
 Route::get('/', [BookController::class, 'index'])->middleware('guest');
+
+
 
 // ROUTE FOR ADMIN
 Route::get('/dashboard', function () {
@@ -31,14 +34,12 @@ Route::get('/kelolatransaksi', function () {
     return view('admin.kelolatransaksi', ['title' => 'kelolatransaksi']);
 })->name('kelolatransaksi');
 
+
+
 // ROUTE FOR PELANGGAN
-Route::get('/homepage', function () {
-    return view('pelanggan.homepage', [
-        'title' => 'homepage',
-        'book' => Book::orderBy('id', 'asc')->paginate(8),
-        'chart_count' => count(BookUser::where('user_id', auth()->user()->id)->get())
-    ]);
-})->name('homepage')->middleware('auth');
+Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage')->middleware('auth');
+
+
 Route::get('/chart', [ChartController::class, 'index'])->name('chart')->middleware('auth');
 Route::get('/transaction', function () {
     $data_get = BookUser::where('user_id', auth()->user()->id)->get();
