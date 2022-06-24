@@ -53,7 +53,7 @@
                 <span class="tooltip">Kelola Data Buku</span>
             </li>
             <li class="{{ $title == 'kelolatransaksi' ? 'active' : '' }}">
-                <a href="{{ route('kelolatransaksi') }}">
+                <a href="{{ route('kelolatransaksi.index') }}">
                     <i class="las la-comment-dollar"></i>
                     <span class="links_name">Kelola Data Transaksi</span>
                 </a>

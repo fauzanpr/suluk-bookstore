@@ -27,13 +27,13 @@
                     </tr>
                 </thead>
                 <tbody>
-
+                    @foreach ($transactions as $transaction)
                     <tr>
-                        <td>1</td>
-                        <td>Ahmad Rafif Alaudin</td>
-                        <td>06/06/2022</td>
-                        <td>280000</td>
-                        <td>Proses</td>
+                        <td>{{ $transaction->id }}</td>
+                        <td>{{ $transaction->user->name }}</td>
+                        <td>{{ $transaction->transaction_date }}</td>
+                        <td>{{ $transaction->price_total }}</td>
+                        <td>{{ $transaction->transaction_status }}</td>
                         <td>
                             <button class="btn btn-primary btn-sm" type="button" title="Edit"
                                 data-bs-toggle="modal" data-bs-target="#edittransaksi">
@@ -45,119 +45,117 @@
                         </td>
                     </tr>
 
+                    <!-- Modal edit Transaksi -->
+                    <!-- Scrollable modal -->
+                    <form action="" method="POST">
+
+                        <div class="modal fade" id="edittransaksi" tabindex="-1" aria-labelledby="exampleModalScrollableTitle"
+                            aria-hidden="true" data-bs-backdrop="false">
+                            <div class="modal-dialog modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Status Transaksi</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+
+                                            <h6>BUKTI TRANSFER</h6>
+                                            <img src="{{ asset('storage/'.$transaction->transfer_proof) }}" class="rounded mx-auto d-block img-fluid mb-5" alt="..." style="max-width: 350px;">
+
+                                            <h6 class="mb-4">DATA TRANSAKSI</h6>
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-4">
+                                                    <p>ID Pelanggan</p>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>: {{ $transaction->user->id }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-4">
+                                                    <p>Nama Pelanggan</p>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>: {{ $transaction->user->name }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-4">
+                                                    <p>Tanggal Transaksi</p>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>: {{ $transaction->transaction_date }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-4">
+                                                    <p>Total Item</p>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>: {{ $transaction->item_total }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-4">
+                                                    <p>Total Harga</p>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>: {{ $transaction->price_total }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label for="Status" class="col-sm-4 col-form-label">Status Transaksi</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-select" name="transaction_status">
+                                                        <option value="{{ $transaction->transaction_status }}">{{ $transaction->transaction_status }}</option>
+                                                        <option value="Proses">Proses</option>
+                                                        <option value="Berhasil">Berhasil</option>
+                                                        <option value="Gagal">Gagal</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <h6 class="mt-5 mb-4">DETAIL TRANSAKSI</h6>
+                                            <!-- tabel detail buku -->
+                                            <div class="container">
+                                                <div class="row mb-2 p-2"style="background-color: #4f46ba; color: #fff" >
+                                                    <div class="col">Sampul</div>
+                                                    <div class="col">Harga Buku</div>
+                                                    <div class="col">QTY</div>
+                                                    <div class="col">Sub Total</div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <img src="{{ asset('images/product-01.jpg') }}" alt="" style="max-width: 60px;">
+                                                    </div>
+                                                    <div class="col">Harga Buku</div>
+                                                    <div class="col">QTY</div>
+                                                    <div class="col">Sub Total</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-success">SIMPAN</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <!-- Modal Edit Transaksi end -->
+
+                    @endforeach
+
                 </tbody>
             </table>
+
+            {!! $transactions->links() !!}
         </div>
     </div>
     <!-- Table Transaksi end -->
-
-    <!-- Modal -->
-
-    <!-- Modal edit Transaksi -->
-    <!-- Scrollable modal -->
-    <form action="" method="POST">
-
-        <div class="modal fade" id="edittransaksi" tabindex="-1" aria-labelledby="exampleModalScrollableTitle"
-            aria-hidden="true" data-bs-backdrop="false">
-            <div class="modal-dialog modal-dialog-scrollable modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalScrollableTitle">Edit Status Transaksi</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-
-                            <h6>BUKTI TRANSFER</h6>
-                            <img src="img/buktitf/bukti.jpg" class="rounded mx-auto d-block img-fluid mb-5"
-                                alt="..." style="max-width: 350px;">
-
-                            <h6 class="mb-4">DATA TRANSAKSI</h6>
-                            <div class="mb-3 row">
-                                <div class="col-sm-4">
-                                    <p>ID Pelanggan</p>
-                                </div>
-                                <div class="col-sm-8">
-                                    <p>: 1</p>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <div class="col-sm-4">
-                                    <p>Nama Pelanggan</p>
-                                </div>
-                                <div class="col-sm-8">
-                                    <p>: Ahmad Rafif Alaudin</p>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <div class="col-sm-4">
-                                    <p>Total Item</p>
-                                </div>
-                                <div class="col-sm-8">
-                                    <p>: 5</p>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <div class="col-sm-4">
-                                    <p>Total Harga</p>
-                                </div>
-                                <div class="col-sm-8">
-                                    <p>: 210000</p>
-                                </div>
-                            </div>
-                            <div class="mb-3 row">
-                                <label for="Status" class="col-sm-4 col-form-label">Status Transaksi</label>
-                                <div class="col-sm-8">
-                                    <select class="form-select" name="status_transaksi">
-                                        <option value="Proses">Proses</option>
-                                        <option value="Berhasil">Berhasil</option>
-                                        <option value="Gagal">Gagal</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <h6 class="mt-5 mb-4">DETAIL TRANSAKSI</h6>
-                            <!-- tabel detail buku -->
-                            <div class="table-responsive">
-                                <table class="table table-hover">
-                                    <thead style="background-color: #4f46ba; color: #fff">
-                                        <tr>
-                                            <th scope="col">Sampul</th>
-                                            <th scope="col">Harga Buku</th>
-                                            <th scope="col">Quantity</th>
-                                            <th scope="col">Sub Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-
-                                        <tr>
-                                            <td>
-                                                <img src="img/buku.png"
-                                                    class="rounded mx-auto d-block img-fluid" alt="sampul"
-                                                    style="max-width: 80px;">
-                                            </td>
-                                            <td>90000</td>
-                                            <td>3</td>
-                                            <td>280000</td>
-                                        </tr>
-
-                                    </tbody>
-                                </table>
-                                <!-- tabel end -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success">SIMPAN</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </form>
-    <!-- Modal Edit Transaksi end -->
-
-    <!-- Modal end -->
 </div>
+
 @endsection
