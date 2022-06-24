@@ -21,7 +21,9 @@ class BookController extends Controller
     {
         $buku = Book::with('category')->get();
         $categories = Category::all();
-        return view('landingpage', ['books' => $buku, 'categories' => $categories]);
+
+        $paginate = Book::orderBy('id', 'asc')->paginate(8);
+        return view('landingpage', ['books' => $paginate, 'categories' => $categories]);
     }
 
     public function tampil()

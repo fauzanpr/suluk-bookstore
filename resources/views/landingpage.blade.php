@@ -360,7 +360,7 @@
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-pic hov-img0">
-                                <img src="{{ asset('storage/'.$book->cover_photo) }}" alt="IMG-PRODUCT">
+                                <img src="images/{{ $book->cover_photo }}.jpg" alt="IMG-PRODUCT">
 
                                 <a class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 {{-- js-show-modal1 --}}" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $book->id }}">
                                     Quick View
@@ -403,7 +403,7 @@
 								<div class="mb-3">
 									<div class="row g-0">
 										<div class="col-md-4">
-											<img src="{{ asset('storage/'.$book->cover_photo) }}" class="img-fluid rounded-start" alt="foto sampul" style="max-height: 500px">
+											<img src="images/{{ $book->cover_photo }}.jpg" class="img-fluid rounded-start" alt="foto sampul" style="max-height: 500px">
 										</div>
 										<div class="col-md-8">
 											<div class="card-body">
@@ -453,10 +453,10 @@
 										</div>
 									</div>
 								</div>
-				
+
 
 							  </div>
-							  
+
 							</div>
 						  </div>
 					</div>
@@ -647,9 +647,9 @@
 
     {{-- !!!! SUMPAH SORI BAT FIF IKI SEK BINGUNG MISAL NGENE HEHE. SEMENTARA TAK COMMENT SEK YAK --}}
 
-	
 
-   
+
+
     <!--===============================================================================================-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
