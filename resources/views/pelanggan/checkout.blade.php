@@ -22,20 +22,28 @@
                                     <th class="column-4 text-center">jumlah</th>
                                     <th class="column-5">sub total</th>
                                 </tr>
+                                @php
+                                    $item_total = 0;
+                                    $price_total = 0;
+                                @endphp
                                 @foreach ($books as $book)
                                     {{-- chart item --}}
                                     <tr class="table_row">
                                         <td class="column-1">
                                             <div class="how-itemcart1">
-                                                <img src="images/item-cart-04.jpg" alt="IMG">
+                                                <img src="images/{{ $book->Book->cover_photo }}.jpg" alt="IMG">
                                             </div>
                                         </td>
-                                        <td class="column-2">{{ $book->title }}</td>
-                                        <td class="column-3">Rp{{ $book->price }}</td>
-                                        <td class="column-4 text-center">{{ $book->sub_cost }}</td>
-                                        <td class="column-5">$ 36.00</td>
+                                        <td class="column-2">{{ $book->Book->title }}</td>
+                                        <td class="column-3">Rp{{ $book->Book->price }}</td>
+                                        <td class="column-4 text-center">{{ $book->sub_item }}</td>
+                                        <td class="column-5">Rp{{ $book->sub_cost }}</td>
                                     </tr>
                                     {{-- chart item end --}}
+                                    @php
+                                        $item_total += $book->sub_item;
+                                        $price_total += $book->sub_cost;
+                                    @endphp
                                 @endforeach
 
 
@@ -45,8 +53,8 @@
                 </div>
 
                 {{-- form insert data transaksi --}}
-                <form method="post" action="" enctype="multipart/form-data">
-
+                <form method="post" action="/totransaction" enctype="multipart/form-data">
+                    @csrf
                     <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
                         <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
                             <h4 class="mtext-109 cl2 p-b-30">
@@ -62,7 +70,7 @@
 
                                 <div class="size-209">
                                     <input type="file" class="mtext-110 cl2 form-control form-control-sm"
-                                        name="bukti_transfer" required>
+                                        name="bukti_transfer">
                                 </div>
                             </div>
 
@@ -74,7 +82,7 @@
                                 </div>
 
                                 <div class="size-209">
-                                    <input type="text" class="mtext-110 cl2" value=": 12" name="total_item" disabled
+                                    <input type="text" class="mtext-110 cl2" value=": {{ $item_total }}" name="total_item" disabled
                                         required>
                                 </div>
                             </div>
@@ -88,7 +96,7 @@
                                 </div>
 
                                 <div class="size-209">
-                                    <input type="text" class="mtext-110 cl2" value=": 300.000" name="total_item" disabled
+                                    <input type="text" class="mtext-110 cl2" value=": {{ $price_total }}" name="total_item" disabled
                                         required>
                                 </div>
                             </div>

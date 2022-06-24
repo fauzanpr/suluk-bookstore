@@ -11,12 +11,11 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\TransactionController;
 
+Route::post('/totransaction', [CheckoutController::class, 'StoreTransaction']);
 
-Route::get('/', [BookController::class, 'index'])->middleware('guest');
-
-
-
+Route::get('/', [BookController::class, 'index']);
 // ROUTE FOR ADMIN
 Route::get('/dashboard', function () {
     return view('admin.dashboard', ['title' => 'dashboard']);
@@ -42,7 +41,7 @@ Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage')-
 
 
 Route::get('/chart', [ChartController::class, 'index'])->name('chart')->middleware('auth');
-Route::get('/transaction', [CheckoutController::class, 'toTransaction'])->name('transaction');
+Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 // REGISTER ROUTE
@@ -55,7 +54,7 @@ Route::post('/login', [LoginController::class, 'authenticate'])->middleware('gue
 Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth');
 
 // DELETE CHART
-Route::get('/delete/{id}', [ChartController::class, 'destroy']);
+Route::get('chart/delete/{id}', [ChartController::class, 'destroy']);
 
 Route::post('/chart/checkout', [ChartController::class, 'checkout']);
 

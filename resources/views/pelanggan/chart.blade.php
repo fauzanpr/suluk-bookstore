@@ -1,9 +1,9 @@
 @extends('pelanggan.layout.masterlayout')
 
 @section('content')
-    @php
+    {{-- @php
     $price_total = 0;
-    @endphp
+    @endphp --}}
     <form class="bg0 p-t-75 p-b-85 mt-5" action="/chart/checkout" method="POST">
         @csrf
         <div class="container">
@@ -57,7 +57,7 @@
                                                 <i class="las la-trash-alt"></i>
                                             </button>
                                         </form> --}}
-                                        <a href="/delete/{{ $item->id }}">
+                                        <a href="/chart/delete/{{ $item->id }}">
                                             <button type="button" class="btn btn-danger btn-sm">
                                                 <i class="las la-trash-alt"></i>
                                             </button>
@@ -66,7 +66,7 @@
                                 </tr>
                                 {{-- chart item end --}}
                                 @php
-                                    $price_total += $total_price;
+                                    // $price_total += $total_price;
                                     $i++;
                                 @endphp
                             @endforeach
@@ -74,9 +74,9 @@
                     </div>
 
                     @if ($chart_count > 0)
-                        <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
+                        {{-- <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
                             <p>Total Belanja : {{ $price_total }}</p>
-                        </div>
+                        </div> --}}
                         <div class="flex-w flex-sb-m bor15 p-t-18 p-b-15 p-lr-40 p-lr-15-sm">
                             <button type="submit"
                                 class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
