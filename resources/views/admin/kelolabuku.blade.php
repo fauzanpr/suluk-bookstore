@@ -27,12 +27,16 @@
                             <i class="las la-external-link-square-alt"></i>
                         </button>
                         <button class="btn btn-primary btn-sm" type="button" title="Edit" data-bs-toggle="modal"
-                            data-bs-target="#editbuku">
+                            data-bs-target="#editbuku{{ $book->id }}">
                             <i class="las la-edit"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm" type="button" title="Hapus">
-                            <i class="las la-trash-alt"></i>
-                        </button>
+                        <form action="{{ route('kelolabuku.destroy', $book->id) }}" method="POST" style="display: inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm" type="submit" title="Hapus">
+                                <i class="las la-trash-alt"></i>
+                            </button>
+                        </form>
                     </div>
                     <div class="card-body  mx-auto" style="padding: 0 0 !important;">
                         <img src="{{ asset('storage/'.$book->cover_photo) }}" class="img-responsive" alt="Foto Buku"
@@ -41,7 +45,7 @@
                 </div>
             </div>
             <!-- card-item-buku end -->
-
+            
             <!-- Modal Detail data Buku -->
             <div class="modal fade" id="detailbuku{{ $book->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"
                 data-bs-backdrop="false">
@@ -114,15 +118,16 @@
             <!-- Modal Detail data Buku -->
 
             <!-- Modal edit data Buku -->
-            <div class="modal fade" id="editbuku" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
+            <div class="modal fade" id="editbuku{{ $book->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="false">
                 <div class="modal-dialog  modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Edit Data Buku</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form method="POST" action="{{ route('kelolabuku.store') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('kelolabuku.update',$book->id) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="modal-body">
                                 <div class="mb-3 row">
                                     <label for="formFile" class="col-sm-5 col-form-label">Foto Sampul Buku</label>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class BookController extends Controller
 {
@@ -100,27 +101,37 @@ class BookController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if ($request->file('cover_photo')) {
-            $image = $request->file('cover_photo')->store('book_cover', 'public');
-        }
+        $book = Book::find($id);
 
         $title = $request->title;
         $slug = str::slug($title, '-');
 
-        Book::create([
-            'category_id' => $request->category_id,
-            'cover_photo' => $image,
-            'isbn' => $request->isbn,
-            'title' => $request->title,
-            'slug' => $slug,
-            'author' => $request->author,
-            'publisher' => $request->publisher,
-            'price' => $request->price,
-            'stock' => $request->stock,
-        ]);
+        $book->category_id = $request->category_id;
+        $book->isbn = $request->isbn;
+        $book->title = $request->title;
+        $book->slug = $slug;
+        $book->author = $request->author;
+        $book->publisher = $request->publisher;
+        $book->price = $request->price;
+        $book->stock = $request->stock;
 
+        if ($request->file('cover_photo')) {
+            if ($book->cover_photo && file_exists(storage_path('app/public/' . $book->cover_photo))) {
+                Storage::delete('public/' . $book->cover_photo);
+            }
+            $image = $request->file('cover_photo')->store('book_cover', 'public');
+        } else {
+            $image = $book->cover_photo;
+        }
+
+
+
+
+        $book->cover_photo = $image;
+
+        $book->save();
         return redirect()->route('kelolabuku.tampil')
-            ->with('success', 'buku berhasil ditambahkan');
+            ->with('success', 'buku berhasil diupdate');
     }
 
     /**
@@ -131,6 +142,14 @@ class BookController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $buku = Book::find($id);
+
+        if ($buku->cover_photo && file_exists(storage_path('app/public/' . $buku->cover_photo))) {
+            Storage::delete('public/' . $buku->cover_photo);
+        }
+
+        $buku->delete();
+        return redirect()->route('kelolabuku.tampil')
+            ->with('success', 'buku berhasil dihapus');
     }
 }

@@ -20,6 +20,8 @@ Route::get('/dashboard', function () {
 // kelola buku
 Route::get('/kelolabuku', [BookController::class, 'tampil'])->name('kelolabuku.tampil');
 Route::post('/kelolabuku', [BookController::class, 'store'])->name('kelolabuku.store');
+Route::put('/kelolabuku/{id}', [BookController::class, 'update'])->name('kelolabuku.update');
+Route::delete('/kelolabuku/{id}', [BookController::class, 'destroy'])->name('kelolabuku.destroy');
 
 Route::get('/kelolapelanggan', function () {
     return view('admin.kelolapelanggan', ['title' => 'kelolapelanggan']);
