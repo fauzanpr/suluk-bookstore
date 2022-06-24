@@ -11,18 +11,14 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'id',
-        'user_id',
-        'transfer_proff',
-        'item_total',
-        'price_total',
-        'transaction_date',
-        'transaction_status',
-    ];
+    protected $guarded = ['id'];
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function bookuser() {
+        return $this->belongsToMany(BookUser::class);
     }
 }

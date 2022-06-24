@@ -1,7 +1,11 @@
 @extends('pelanggan.layout.masterlayout')
 
 @section('content')
-    <form class="bg0 p-t-75 p-b-85 mt-5">
+    @php
+    $price_total = 0;
+    @endphp
+    <form class="bg0 p-t-75 p-b-85 mt-5" action="/chart/checkout" method="POST">
+        @csrf
         <div class="container">
             <div class="row">
                 <div class="m-l-25 m-r--38 m-lr-0-xl">
@@ -17,15 +21,12 @@
                                 <th class="column-5">Total</th>
                                 <th class="column-5">Aksi</th>
                             </tr>
-                            @php
-                                $price_total = 0;
-                            @endphp
                             @foreach ($chart_items as $item)
                                 {{-- chart item --}}
                                 <tr class="table_row">
                                     <td>
-                                        <input class="text-center me-5" type="checkbox" value="ini nanti id chart item"
-                                            name="id[ini id chart item juga]" aria-label="..."
+                                        <input class="text-center me-5" type="checkbox" value="{{ $item->id }}"
+                                            name="id[{{ $item->id }}]" aria-label="..."
                                             style="width: 50px !important;">
                                     </td>
                                     <td>

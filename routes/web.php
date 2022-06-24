@@ -6,6 +6,7 @@ use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
@@ -41,20 +42,8 @@ Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage')-
 
 
 Route::get('/chart', [ChartController::class, 'index'])->name('chart')->middleware('auth');
-Route::get('/transaction', function () {
-    $data_get = BookUser::where('user_id', auth()->user()->id)->get();
-    return view('pelanggan.transaction', [
-        'title' => 'transaction',
-        'chart_count' => count($data_get)
-    ]);
-})->name('transaction');
-Route::get('/checkout', function () {
-    $data_get = BookUser::where('user_id', auth()->user()->id)->get();
-    return view('pelanggan.checkout', [
-        'title' => 'checkout',
-        'chart_count' => count($data_get)
-    ]);
-})->name('checkout');
+Route::get('/transaction', [CheckoutController::class, 'toTransaction'])->name('transaction');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 // REGISTER ROUTE
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
@@ -67,3 +56,5 @@ Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth');
 
 // DELETE CHART
 Route::get('/delete/{id}', [ChartController::class, 'destroy']);
+
+Route::post('/chart/checkout', [ChartController::class, 'checkout']);
