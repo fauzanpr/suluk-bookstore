@@ -135,28 +135,5 @@ class DatabaseSeeder extends Seeder
             'price' => 120000,
             'stock' => 11
         ]);
-
-        User::create([
-            'name' => 'fauzan',
-            'email' => 'fauzanpr@gmail.com',
-            'password' => Hash::make('123')
-        ]);
-
-        BookUser::create([
-            'user_id' => 1,
-            'book_id' => 1,
-            'sub_item' => 2,
-            'sub_cost' => 250000,
-            'status' => 'keranjang'
-        ]);
-
-        BookUser::create([
-            'user_id' => 1,
-            'book_id' => 2,
-            'sub_item' => 1,
-            'sub_cost' => 115000,
-            'status' => 'keranjang'
-        ]);
-
     }
 }

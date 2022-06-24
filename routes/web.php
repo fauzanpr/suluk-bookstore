@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\UserController;
 
 
 Route::get('/', [BookController::class, 'index'])->middleware('guest');
@@ -27,9 +28,12 @@ Route::post('/kelolabuku', [BookController::class, 'store'])->name('kelolabuku.s
 Route::put('/kelolabuku/{id}', [BookController::class, 'update'])->name('kelolabuku.update');
 Route::delete('/kelolabuku/{id}', [BookController::class, 'destroy'])->name('kelolabuku.destroy');
 
-Route::get('/kelolapelanggan', function () {
-    return view('admin.kelolapelanggan', ['title' => 'kelolapelanggan']);
-})->name('kelolapelanggan');
+// kelola pelanggan
+Route::get('/kelolapelanggan', [UserController::class, 'index'])->name('kelolapelanggan.index');
+Route::put('/kelolapelanggan/{id}', [UserController::class, 'update'])->name('kelolapelanggan.update');
+Route::delete('/kelolapelanggan/{id}', [UserController::class, 'destroy'])->name('kelolapelanggan.destroy');
+
+
 Route::get('/kelolatransaksi', function () {
     return view('admin.kelolatransaksi', ['title' => 'kelolatransaksi']);
 })->name('kelolatransaksi');
