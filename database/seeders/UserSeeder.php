@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
             [
                 'id' => 1,
                 'name' => 'Fauzan Pradana',
-                'email' => 'Fauzan@gmail.com',
+                'email' => 'fauzan@gmail.com',
                 'telp' => '089783728378',
                 'province' => 'Jawa Timur',
                 'city' => 'blitar',
