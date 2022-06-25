@@ -7,9 +7,9 @@
     </h5>
 
     <!-- btn cetak -->
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <a class="d-grid gap-2 d-md-flex justify-content-md-end" href="{{ route('kelolatransaksi.cetak') }}" target="_blank">
         <button type="button" class="btn btn-danger mt-4"><i class="las la-print"> </i> Cetak Laporan</button>
-    </div>
+    </a>
     <!-- btn cetak -->
 
     <!-- Table Transaksi -->
@@ -110,9 +110,9 @@
                                                 <div class="col-sm-8">
                                                     <select class="form-select" name="transaction_status">
                                                         <option value="{{ $transaction->transaction_status }}">{{ $transaction->transaction_status }}</option>
-                                                        <option value="Proses">Proses</option>
-                                                        <option value="Berhasil">Berhasil</option>
-                                                        <option value="Gagal">Gagal</option>
+                                                        <option value="Proses">payyed</option>
+                                                        <option value="Berhasil">success</option>
+                                                        <option value="Gagal">fail</option>
                                                     </select>
                                                 </div>
                                             </div>

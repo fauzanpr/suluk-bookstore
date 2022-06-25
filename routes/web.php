@@ -36,6 +36,7 @@ Route::delete('/kelolapelanggan/{id}', [UserController::class, 'destroy'])->name
 
 // kelola transaksi
 Route::get('/kelolatransaksi', [KelolaTransaksiController::class, 'index'])->name('kelolatransaksi.index');
+Route::get('/kelolatransaksi/cetak', [KelolaTransaksiController::class, 'cetak'])->name('kelolatransaksi.cetak');
 
 
 

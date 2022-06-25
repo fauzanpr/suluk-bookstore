@@ -30,7 +30,7 @@ class CheckoutController extends Controller
         $price_total = 0;
 
         $data_get = Chart::where('user_id', auth()->user()->id)->get();
-        $photo = $request->file('bukti_transfer')->store('bukti_transfer');
+        $photo = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
         $book_user = BookUser::where('user_id', auth()->user()->id)->get();
 
         foreach ($book_user as $bu) {

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
+
 
 
 class KelolaTransaksiController extends Controller
@@ -86,5 +89,15 @@ class KelolaTransaksiController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function cetak()
+    {
+        $total = DB::table('transactions')
+            ->where('transactions.transaction_status', 'success')
+            ->sum('transactions.price_total');
+        $transactions = Transaction::with('user')->where('transaction_status', 'success')->get();
+        $pdf = PDF::loadview('admin.laporan', ['transactions' => $transactions, 'total' => $total]);
+        return $pdf->stream();
     }
 }
