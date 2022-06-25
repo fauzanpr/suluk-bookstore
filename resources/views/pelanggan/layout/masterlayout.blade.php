@@ -58,7 +58,12 @@
                 <nav class="limiter-menu-desktop container">
 
                     <!-- Logo desktop -->
-                    <a href="#" class="logo" style="color:black">
+                    @auth
+                    <a href="/homepage" class="logo" style="color:black">
+                    @endauth
+                    @guest
+                    <a href="/" class="logo" style="color:black">
+                    @endguest
                         <img src="images/icons/logo.jpeg" alt="IMG-LOGO">
                         <h2 class="ms-3">SULUK</h2>
                         <p>Book Store</p>

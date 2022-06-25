@@ -6,18 +6,18 @@ use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\ChartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KelolaTransaksiController;
 
+Route::post('/totransaction', [CheckoutController::class, 'StoreTransaction']);
 
 Route::get('/', [BookController::class, 'index'])->middleware('guest');
-
-
-
 // ROUTE FOR ADMIN
 Route::get('/dashboard', function () {
     return view('admin.dashboard', ['title' => 'dashboard']);
@@ -44,20 +44,8 @@ Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage')-
 
 
 Route::get('/chart', [ChartController::class, 'index'])->name('chart')->middleware('auth');
-Route::get('/transaction', function () {
-    $data_get = BookUser::where('user_id', auth()->user()->id)->get();
-    return view('pelanggan.transaction', [
-        'title' => 'transaction',
-        'chart_count' => count($data_get)
-    ]);
-})->name('transaction');
-Route::get('/checkout', function () {
-    $data_get = BookUser::where('user_id', auth()->user()->id)->get();
-    return view('pelanggan.checkout', [
-        'title' => 'checkout',
-        'chart_count' => count($data_get)
-    ]);
-})->name('checkout');
+Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 
 // REGISTER ROUTE
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest');
@@ -69,4 +57,8 @@ Route::post('/login', [LoginController::class, 'authenticate'])->middleware('gue
 Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth');
 
 // DELETE CHART
-Route::get('/delete/{id}', [ChartController::class, 'destroy']);
+Route::get('chart/delete/{id}', [ChartController::class, 'destroy']);
+
+Route::post('/chart/checkout', [ChartController::class, 'checkout']);
+
+Route::post('/chart/add/{id}', [ChartController::class, 'add']);

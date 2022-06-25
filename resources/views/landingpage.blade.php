@@ -226,6 +226,10 @@
 
     </header>
 
+    @if (session()->has('loginError'))
+        <script>alert('Login Gagal')</script>
+    @endif
+
 
 
     <!-- Slider (jombootron) -->
