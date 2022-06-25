@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use App\Models\Book;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
-
-class BookUser extends Model
+class Chart extends Model
 {
     use HasFactory;
 
@@ -20,9 +17,5 @@ class BookUser extends Model
 
     public function user() {
         return $this->belongsTo(User::class);
-    }
-
-    public function transaction() {
-        return $this->belongsToMany(Transaction::class);
     }
 }
