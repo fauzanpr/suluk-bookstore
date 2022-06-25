@@ -17,7 +17,7 @@
                             <i class="las la-comments-dollar" style="font-size:5rem"></i>
                         </div>
                         <div class="media-body text-right align-self-center">
-                            <h3>Rp. 3000000</h3>
+                            <h3>Rp. {{ $sum }}</h3>
                             <span>Total Transaksi Bulan Ini</span>
                         </div>
                     </div>
@@ -34,7 +34,7 @@
                             <i class="las la-dolly-flatbed" style="font-size:5rem"></i>
                         </div>
                         <div class="media-body text-right align-self-center">
-                            <h3>30</h3>
+                            <h3>{{ $transactions }}</h3>
                             <span>Jumlah Transaksi</span>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                             <i class="las la-book" style="font-size:5rem"></i>
                         </div>
                         <div class="media-body text-right align-self-center">
-                            <h3>42</h3>
+                            <h3>{{ $books }}</h3>
                             <span>Jumlah Buku</span>
                         </div>
                     </div>
@@ -68,7 +68,7 @@
                             <i class="las la-users float-left" style="font-size:5rem"></i>
                         </div>
                         <div class="media-body text-right align-self-center">
-                            <h3>278</h3>
+                            <h3>{{ $users }}</h3>
                             <span>Jumlah Akun Pelanggan</span>
                         </div>
                     </div>

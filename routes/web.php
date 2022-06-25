@@ -14,14 +14,17 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KelolaTransaksiController;
+use App\Http\Controllers\DashboardAdminController;
 
 Route::post('/totransaction', [CheckoutController::class, 'StoreTransaction']);
 
 Route::get('/', [BookController::class, 'index'])->middleware('guest');
+
+
 // ROUTE FOR ADMIN
-Route::get('/dashboard', function () {
-    return view('admin.dashboard', ['title' => 'dashboard']);
-})->name('dashboard');
+
+//dashboard
+Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
 
 // kelola buku
 Route::get('/kelolabuku', [BookController::class, 'tampil'])->name('kelolabuku.tampil');
@@ -37,6 +40,8 @@ Route::delete('/kelolapelanggan/{id}', [UserController::class, 'destroy'])->name
 // kelola transaksi
 Route::get('/kelolatransaksi', [KelolaTransaksiController::class, 'index'])->name('kelolatransaksi.index');
 Route::get('/kelolatransaksi/cetak', [KelolaTransaksiController::class, 'cetak'])->name('kelolatransaksi.cetak');
+Route::put('/kelolatransaksi/{id}', [KelolaTransaksiController::class, 'update'])->name('kelolatransaksi.update');
+
 
 
 

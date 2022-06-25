@@ -36,7 +36,7 @@
                         <td>{{ $transaction->transaction_status }}</td>
                         <td>
                             <button class="btn btn-primary btn-sm" type="button" title="Edit"
-                                data-bs-toggle="modal" data-bs-target="#edittransaksi">
+                                data-bs-toggle="modal" data-bs-target="#edittransaksi{{ $transaction->id }}">
                                 <i class="las la-edit"></i>
                             </button>
                             <button class="btn btn-danger btn-sm" type="button" title="Hapus">
@@ -47,9 +47,11 @@
 
                     <!-- Modal edit Transaksi -->
                     <!-- Scrollable modal -->
-                    <form action="" method="POST">
+                    <form action="{{ route('kelolatransaksi.update', $transaction->id) }}" method="POST">
+                        @csrf
+                        @method('PUT')
 
-                        <div class="modal fade" id="edittransaksi" tabindex="-1" aria-labelledby="exampleModalScrollableTitle"
+                        <div class="modal fade" id="edittransaksi{{ $transaction->id }}" tabindex="-1" aria-labelledby="exampleModalScrollableTitle"
                             aria-hidden="true" data-bs-backdrop="false">
                             <div class="modal-dialog modal-dialog-scrollable modal-lg">
                                 <div class="modal-content">
@@ -110,9 +112,9 @@
                                                 <div class="col-sm-8">
                                                     <select class="form-select" name="transaction_status">
                                                         <option value="{{ $transaction->transaction_status }}">{{ $transaction->transaction_status }}</option>
-                                                        <option value="Proses">payyed</option>
-                                                        <option value="Berhasil">success</option>
-                                                        <option value="Gagal">fail</option>
+                                                        <option value="payyed">payyed</option>
+                                                        <option value="success">success</option>
+                                                        <option value="fail">fail</option>
                                                     </select>
                                                 </div>
                                             </div>

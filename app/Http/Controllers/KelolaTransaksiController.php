@@ -19,6 +19,9 @@ class KelolaTransaksiController extends Controller
     public function index()
     {
         $transactions = Transaction::with('bookusertransaction')->orderBy('id', 'desc')->paginate(5);
+
+        // $transactions = DB::table('transactions')
+        // ->join()
         $title = "kelolatransaksi";
 
 
@@ -77,7 +80,14 @@ class KelolaTransaksiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $transaction = Transaction::find($id);
+
+        $transaction->transaction_status = $request->transaction_status;
+
+
+        $transaction->save();
+        return redirect()->route('kelolatransaksi.index')
+            ->with('success', 'transaksi berhasil diupdate');
     }
 
     /**
