@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\BookUserTransaction;
 
 
 class Transaction extends Model
@@ -18,7 +19,14 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function bookuser() {
+    public function bookuser()
+    {
         return $this->belongsToMany(BookUser::class);
     }
+
+    public function bookusertransaction()
+    {
+        return $this->hasMany(BookUserTransaction::class);
+    }
+
 }

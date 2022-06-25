@@ -14,15 +14,18 @@ class BookUser extends Model
 
     protected $guarded = ['id'];
 
-    public function book() {
+    public function book()
+    {
         return $this->belongsTo(Book::class);
     }
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function transaction() {
+    public function transaction()
+    {
         return $this->belongsToMany(Transaction::class);
     }
 }

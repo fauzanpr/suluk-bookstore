@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Transaction;
+
 
 class BookUserTransaction extends Model
 {
@@ -11,4 +13,8 @@ class BookUserTransaction extends Model
 
     protected $guarded = ['id'];
 
+    public function transaction()
+    {
+        return $this->belongsTo(Transaction::class);
+    }
 }

@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BookUser;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\Transaction;
 use Carbon\Carbon;
 use App\Models\Chart;
 use App\Models\BookUser;
