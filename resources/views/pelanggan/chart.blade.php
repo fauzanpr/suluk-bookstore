@@ -4,6 +4,7 @@
     {{-- @php
     $price_total = 0;
     @endphp --}}
+
     <form class="bg0 p-t-75 p-b-85 mt-5" action="/chart/checkout" method="POST">
         @csrf
         <div class="container">
@@ -29,8 +30,8 @@
                                 <tr class="table_row">
                                     <td>
                                         <input class="text-center me-5" type="checkbox" value="{{ $item->id }}"
-                                            name="id[{{ $i }}]" aria-label="..."
-                                            style="width: 50px !important;">
+                                            name="id[{{ $i }}]" aria-label="..." style="width: 50px !important;"
+                                            id="checkBtn">
                                     </td>
                                     <td>
                                         <div class="how-itemcart1">
@@ -126,4 +127,19 @@
             </div>
         </div>
     </form>
+
+
+    {{-- <script type="text/javascript">
+        $(document).ready(function() {
+            $('#checkBtn').click(function() {
+                checked = $("input[type=checkbox]:checked").length;
+
+                if (checked == 0) {
+                    alert("You must check at least one checkbox.");
+                    return false;
+                }
+
+            });
+        });
+    </script> --}}
 @endsection
