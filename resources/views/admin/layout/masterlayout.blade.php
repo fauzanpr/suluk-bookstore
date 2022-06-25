@@ -60,7 +60,7 @@
                 <span class="tooltip">Kelola Data Transaksi</span>
             </li>
             <li class="{{ $title == 'kelolapelanggan' ? 'active' : '' }}">
-                <a href="{{ route('kelolapelanggan') }}">
+                <a href="{{ route('kelolapelanggan.index') }}">
                     <i class="las la-user-circle"></i>
                     <span class="links_name">Kelola Akun Pelanggan</span>
                 </a>
