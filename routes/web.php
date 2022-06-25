@@ -15,7 +15,7 @@ use App\Http\Controllers\TransactionController;
 
 Route::post('/totransaction', [CheckoutController::class, 'StoreTransaction']);
 
-Route::get('/', [BookController::class, 'index']);
+Route::get('/', [BookController::class, 'index'])->middleware('guest');
 // ROUTE FOR ADMIN
 Route::get('/dashboard', function () {
     return view('admin.dashboard', ['title' => 'dashboard']);

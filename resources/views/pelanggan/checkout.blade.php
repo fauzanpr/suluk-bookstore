@@ -2,7 +2,8 @@
 
 @section('content')
     <!-- Shoping Cart -->
-    <form class="bg0 p-t-75 p-b-85 mt-5">
+    <form class="bg0 p-t-75 p-b-85 mt-5" method="POST" action="/totransaction" enctype="multipart/form-data">
+        @csrf
         <div class="container mt-5">
             <div class="container p-3">
                 <div class="alert alert-info">
@@ -53,7 +54,7 @@
                 </div>
 
                 {{-- form insert data transaksi --}}
-                <form method="post" action="/totransaction" enctype="multipart/form-data">
+                {{-- <form method="post" action="/totransaction" enctype="multipart/form-data"> --}}
                     @csrf
                     <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
                         <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
@@ -70,7 +71,7 @@
 
                                 <div class="size-209">
                                     <input type="file" class="mtext-110 cl2 form-control form-control-sm"
-                                        name="bukti_transfer">
+                                        name="bukti_transfer" required>
                                 </div>
                             </div>
 
@@ -108,7 +109,7 @@
                         </div>
                     </div>
 
-                </form>
+                {{-- </form> --}}
 
 
             </div>

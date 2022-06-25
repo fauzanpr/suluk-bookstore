@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BookUser;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use App\Models\Chart;
+use App\Models\BookUser;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class CheckoutController extends Controller
 {
@@ -23,15 +25,35 @@ class CheckoutController extends Controller
 
     public function StoreTransaction(Request $request)
     {
-        return dd($request);
-        // $data_get = Chart::where('user_id', auth()->user()->id)->get();
-        // $request->file('bukti_transfer')->store('bukti_transfer');
+        // return dd($request);
+        $item_total = 0;
+        $price_total = 0;
 
-        // $transaction = Transaction::where('user_id', auth()->user()->id)->get();
-        // return view('pelanggan.transaction', [
-        //     'title' => 'transaction',
-        //     'chart_count' => count($data_get),
-        //     'transaction' => $transaction
-        // ]);
+        $data_get = Chart::where('user_id', auth()->user()->id)->get();
+        $photo = $request->file('bukti_transfer')->store('bukti_transfer');
+        $book_user = BookUser::where('user_id', auth()->user()->id)->get();
+
+        foreach ($book_user as $bu) {
+            $item_total += $bu->sub_item;
+            $price_total += $bu->sub_cost;
+        }
+
+        Transaction::create([
+            'user_id' => auth()->user()->id,
+            'transfer_proof' => $photo,
+            'item_total' => $item_total,
+            'price_total' => $price_total,
+            'transaction_date' => Carbon::now(),
+            'transaction_status' => 'payyed'
+        ]);
+
+        BookUser::truncate();
+
+        $transaction = Transaction::where('user_id', auth()->user()->id)->get();
+        return view('pelanggan.transaction', [
+            'title' => 'Transaction',
+            'chart_count' => count($data_get),
+            'transaction' => $transaction,
+        ]);
     }
 }

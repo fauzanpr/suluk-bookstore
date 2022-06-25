@@ -24,20 +24,21 @@
                             <td>{{ $t->price_total }}</td>
                             <td>
                                 <button title="detail" type="button" class="btn btn-info btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#detailtransaksi" style="padding: 2px">
+                                    data-bs-target="#detailtransaksi{{ $t->id }}" style="padding: 2px">
                                     <i class="las la-external-link-alt" style="color: white; font-size: 20px;"></i>
                                 </button>
                             </td>
                             <td>
-                                @if ($t->transaction_status == 'gagal')
+                                @if ($t->transaction_status == 'fail')
                                     <button class="btn btn-danger me-md-2 btn-sm" type="button" disabled>Gagal</button>
                                 @endif
 
-                                @if ($t->transaction_status == 'proses')
-                                    <button class="btn btn-primary me-md-2 btn-sm" type="button" disabled>Proses</button>
+                                @if ($t->transaction_status == 'payyed')
+                                    <button class="btn btn-primary me-md-2 btn-sm" type="button" disabled>Sudah
+                                        Dibayar</button>
                                 @endif
 
-                                @if ($t->transaction_status == 'berhasil')
+                                @if ($t->transaction_status == 'success')
                                     <button class="btn btn-success me-md-2 btn-sm" type="button" disabled>Berhasil</button>
                                 @endif
 
@@ -52,8 +53,8 @@
 
     <!-- Modal detail Transaksi -->
 
-    <div class="modal fade" id="detailtransaksi" tabindex="-1" aria-labelledby="exampleModalScrollableTitle"
-        aria-hidden="true" style="max-height: 500px;margin-top: 10vh;">
+    <div class="modal fade" id="detailtransaksi{{ $t->id }}" tabindex="-1"
+        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true" style="max-height: 500px;margin-top: 10vh;">
         <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -64,8 +65,8 @@
                     <div class="container">
 
                         <h6>BUKTI TRANSFER</h6>
-                        <img src="img/buktitf/bukti.jpg" class="rounded mx-auto d-block img-fluid mb-5" alt="..."
-                            style="max-width: 350px;">
+                        <img src="storage/{{ $t->transfer_proof }}" class="rounded mx-auto d-block img-fluid mb-5"
+                            alt="..." style="max-width: 350px;">
 
                         <h6 class="mb-4">DATA TRANSAKSI</h6>
                         <div class="mb-3 row">
@@ -73,7 +74,7 @@
                                 <p>ID Transaksi</p>
                             </div>
                             <div class="col-sm-8">
-                                <p>: 1</p>
+                                <p>: {{ $t->id }}</p>
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -89,7 +90,7 @@
                                 <p>Total Item</p>
                             </div>
                             <div class="col-sm-8">
-                                <p>: 5</p>
+                                <p>: {{ $t->item_total }}</p>
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -97,7 +98,7 @@
                                 <p>Total Harga</p>
                             </div>
                             <div class="col-sm-8">
-                                <p>: 210000</p>
+                                <p>: {{ $t->price_total }}</p>
                             </div>
                         </div>
                         <div class="mb-3 row">
@@ -105,7 +106,7 @@
                                 <p>Status</p>
                             </div>
                             <div class="col-sm-8">
-                                <p>: Proses</p>
+                                <p>: {{ $t->transaction_status }}</p>
                             </div>
                         </div>
 
