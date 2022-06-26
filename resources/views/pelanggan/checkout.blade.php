@@ -32,7 +32,11 @@
                                     <tr class="table_row">
                                         <td class="column-1">
                                             <div class="how-itemcart1">
-                                                <img src="images/{{ $book->Book->cover_photo }}.jpg" alt="IMG">
+                                                @if (is_null($book->book->cover_photo))
+                                            <img src="images/product-01.jpg" alt="IMG">
+                                            @else
+                                            <img src="{{ asset('storage/'.$book->book->cover_photo) }}" alt="IMG">
+                                            @endif
                                             </div>
                                         </td>
                                         <td class="column-2">{{ $book->Book->title }}</td>

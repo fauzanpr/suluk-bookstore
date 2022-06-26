@@ -64,15 +64,46 @@
 
                     <!-- Logo desktop -->
                     @auth
-                        <a href="/homepage" class="logo" style="color:black">
-                        @endauth
-                        @guest
-                            <a href="/" class="logo" style="color:black">
-                            @endguest
-                            <img src="images/icons/logo.jpeg" alt="IMG-LOGO">
-                            <h2 class="ms-3">SULUK</h2>
-                            <p>Book Store</p>
-                        </a>
+                    <a href="/homepage" class="logo" style="color:black">
+                    @endauth
+                    @guest
+                    <a href="/" class="logo" style="color:black">
+                    @endguest
+                        <img src="images/icons/logo.jpeg" alt="IMG-LOGO">
+                        <h2 class="ms-3">SULUK</h2>
+                        <p>Book Store</p>
+                    </a>
+
+                    <!-- Menu desktop -->
+                    <div class="menu-desktop">
+                        <ul class="main-menu">
+                            <li>
+                                <a href="{{ route('homepage') }}">Home</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('checkout') }}">checkout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Icon header -->
+                    <div class="wrap-icon-header flex-w flex-r-m">
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                            <i class="zmdi zmdi-search"></i>
+                        </div>
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                            data-notify="{{ $chart_count }}">
+                            <a href="{{ route('chart') }}"><i class="zmdi zmdi-shopping-cart"></i></a>
+                        </div>
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                            data-notify="{{ $chart_count }}">
+                            <a href="{{ route('transaction') }}"><i class="las la-shopping-bag"></i></a>
+                        </div>
+                        <div class="dropdown icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">
+                            <a class="p-2" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="zmdi zmdi-account zmd-fw"></i>
+                            </a>
 
                         <!-- Menu desktop -->
                         <div class="menu-desktop">

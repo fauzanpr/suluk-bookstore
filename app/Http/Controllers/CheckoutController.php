@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
+
 class CheckoutController extends Controller
 {
     public function index()
@@ -43,17 +44,23 @@ class CheckoutController extends Controller
             }
         }
 
-        Transaction::create([
-            'user_id' => auth()->user()->id,
-            'transfer_proof' => $photo,
-            'item_total' => $item_total,
-            'price_total' => $price_total,
-            'transaction_date' => Carbon::now(),
-            'transaction_status' => 'payyed'
-        ]);
+        $newTransaction = new Transaction();
+        $newTransaction->user_id = auth()->user()->id;
+        $newTransaction->transfer_proof = $photo;
+        $newTransaction->item_total = $item_total;
+        $newTransaction->price_total = $price_total;
+        $newTransaction->transaction_date = Carbon::now();
+        $newTransaction->transaction_status = 'payyed';
+
+        $newTransaction->save();
+
+        //get max transaction id
+        $maxid = $newTransaction->id;
 
         foreach ($book_user as $bu) {
-            BookUser::find($bu->id)->update(['transaction_id' => Transaction::latest()->first()->id]);
+            if ($bu->status === 'tampil') {
+                BookUser::find($bu->id)->update(['transaction_id' => $maxid]);
+            }
         }
 
         $transaction = Transaction::where('user_id', auth()->user()->id)->get();

@@ -129,7 +129,11 @@
                         <!-- Block2 -->
                         <div class="block2">
                             <div class="block2-pic hov-img0">
-                                <img src="images/{{ $book->cover_photo }}.jpg" alt="IMG-PRODUCT">
+                                @if (is_null($book->cover_photo))
+                                <img src="images/product-01.jpg" alt="IMG-PRODUCT">
+                                @else
+                                <img src="{{ asset('storage/'.$book->cover_photo) }}" alt="IMG-PRODUCT">
+                                @endif
 
                                 <a class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 {{-- js-show-modal1 --}}" data-bs-toggle="modal" data-bs-target="#exampleModal{{ $book->id }}">
                                     Quick View
@@ -173,9 +177,9 @@
 									<div class="row g-0">
 										<div class="col-md-4">
                                             @if (is_null($book->cover_photo))
-                                            <img src="images/{{ $book->cover_photo }}.jpg" class="img-fluid rounded-start" alt="foto sampul" style="max-height: 500px">
+                                            <img src="images/product-01.jpg" class="img-fluid rounded-start" alt="foto sampul" style="max-height: 500px">
                                             @else
-											<img src="images/{{ $book->cover_photo }}.jpg" class="img-fluid rounded-start" alt="foto sampul" style="max-height: 500px">
+											<img src="{{ asset('storage/'.$book->cover_photo) }}" class="img-fluid rounded-start" alt="foto sampul" style="max-height: 500px">
                                             @endif
 										</div>
 										<div class="col-md-8">
