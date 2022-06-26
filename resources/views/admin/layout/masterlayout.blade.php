@@ -101,9 +101,8 @@
     </section>
 
     {{-- modal edit profile --}}
-    <form action="{{ route('profiladmin.update', auth()->user()->id) }}" method="POST" enctype="multipart/form">
+    <form action="/admin/edit" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
         <div class="modal fade" id="editprofil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
@@ -135,6 +134,7 @@
                                 value="{{ auth()->user()->telp }}" required>
                             <label for="floatingInput">Nomor Handphone</label>
                         </div>
+                        <input type="text" class="form-control" id="floatingInput" name="id" value="{{ auth()->user()->id }}" hidden>
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success">SIMPAN</button>

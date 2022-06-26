@@ -24,6 +24,7 @@ Route::get('/', [BookController::class, 'index'])->middleware('guest');
 
 // ROUTE FOR ADMIN
 Route::put('/dashboard/{id}', [MasterLayoutAdminController::class, 'update'])->name('profiladmin.update');
+Route::post('/admin/edit', [MasterLayoutAdminController::class, 'updateAll']);
 
 //dashboard
 Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard')->middleware('checkRole:1');
