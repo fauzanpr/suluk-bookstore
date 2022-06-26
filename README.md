@@ -33,6 +33,12 @@ You can edit your .env, such as DATABASE_NAME. Customize it corresponding your d
 php artisan migrate:fresh --seed
 ```
 
+### Don't forget to Change Your .env
+add FILESYSTEM_DRIVER=public
+
+### Lets make link media on storage to public
+php artisan storage:link
+
 ### Run it :)
 You can run, using
 ```
