@@ -14,7 +14,10 @@ class CheckoutController extends Controller
 {
     public function index()
     {
-        $data_get = BookUser::where('user_id', auth()->user()->id)->get();
+        $data_get = BookUser::where([
+            'user_id' => auth()->user()->id,
+            'status' => 'tampil'
+        ])->get();
         $chart = Chart::where('user_id', auth()->user()->id)->get();
         return view('pelanggan.checkout', [
             'title' => 'Checkout',
@@ -25,7 +28,6 @@ class CheckoutController extends Controller
 
     public function StoreTransaction(Request $request)
     {
-        // return dd($request);
         $item_total = 0;
         $price_total = 0;
 
@@ -34,8 +36,11 @@ class CheckoutController extends Controller
         $book_user = BookUser::where('user_id', auth()->user()->id)->get();
 
         foreach ($book_user as $bu) {
-            $item_total += $bu->sub_item;
-            $price_total += $bu->sub_cost;
+            if ($bu->status === 'tampil') {
+                $item_total += $bu->sub_item;
+                $price_total += $bu->sub_cost;
+                BookUser::find($bu->id)->update(['status' => 'deleted']);
+            }
         }
 
         Transaction::create([
@@ -47,9 +52,12 @@ class CheckoutController extends Controller
             'transaction_status' => 'payyed'
         ]);
 
-        BookUser::truncate();
+        foreach ($book_user as $bu) {
+            BookUser::find($bu->id)->update(['transaction_id' => Transaction::latest()->first()->id]);
+        }
 
         $transaction = Transaction::where('user_id', auth()->user()->id)->get();
+
         return view('pelanggan.transaction', [
             'title' => 'Transaction',
             'chart_count' => count($data_get),

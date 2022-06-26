@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\BookUserTransaction;
 
-
 class Transaction extends Model
 {
     use HasFactory;
@@ -29,4 +28,8 @@ class Transaction extends Model
         return $this->hasMany(BookUserTransaction::class);
     }
 
+    public function book()
+    {
+        return $this->hasMany(Book::class);
+    }
 }

@@ -90,15 +90,28 @@ class ChartController extends Controller
 
     public function checkout(Request $request)
     {
+        // ddd($request->id);
+        if ($request->id == null) {
+            return redirect('chart')->with('errorValidation', 'Harus memilih salah satu');
+        }
         $books = Chart::find($request->id);
 
-        for ($i = 0; $i < sizeof($books); $i++) {
+        // for ($i = 0; $i < sizeof($books); $i++) {
+        //     BookUser::create([
+        //         'user_id' => auth()->user()->id,
+        //         'book_id' => $books[$i]->Book->id,
+        //         'sub_item' => $books[$i]->sub_item,
+        //         'sub_cost' => $books[$i]->sub_cost,
+        //         'status' => 'proses'
+        //     ]);
+        // }
+        foreach ($books as $book) {
             BookUser::create([
                 'user_id' => auth()->user()->id,
-                'book_id' => $books[$i]->Book->id,
-                'sub_item' => $books[$i]->sub_item,
-                'sub_cost' => $books[$i]->sub_cost,
-                'status' => 'proses'
+                'book_id' => $book->Book->id,
+                'sub_item' => $book->sub_item,
+                'sub_cost' => $book->sub_cost,
+                'status' => 'tampil'
             ]);
         }
 
@@ -128,4 +141,14 @@ class ChartController extends Controller
     //     DB::table('book_users')->delete($request->id);
     //     return redirect('/homepage');
     // }
+
+    public function update(Request $request) {
+        $sub_cost = Chart::find($request->id)->sub_cost;
+        $sub_cost *= $request->num_product;
+        Chart::find($request->id)->update([
+            'sub_item' => $request->num_product,
+            'sub_cost' => $sub_cost
+        ]);
+        return redirect('/chart');
+    }
 }

@@ -41,6 +41,9 @@
     <!--===============================================================================================-->
 </head>
 
+@if (session()->has('registerEmailError'))
+    <script>alert("Email sudah digunakan")</script>
+@endif
 <body class="animsition">
 
     {{-- @if (session()->has('loginError'))
