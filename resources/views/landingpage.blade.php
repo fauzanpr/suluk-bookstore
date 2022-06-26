@@ -121,7 +121,8 @@
         </div>
 
         <!-- modal login Admin -->
-        <form action="" method="post">
+        <form action="/admin/login" method="post">
+            @csrf
             <div class="modal fade" id="loginadmin" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-sm">
@@ -135,12 +136,12 @@
                             <div class="container mb-3 mt-3">
                                 <div class="form-floating mb-3">
                                     <input type="email" class="form-control" id="floatingInput"
-                                        placeholder="name@example.com" name="email_admin">
+                                        placeholder="name@example.com" name="email">
                                     <label for="floatingInput">Email address</label>
                                 </div>
                                 <div class="form-floating">
                                     <input type="password" class="form-control" id="floatingPassword"
-                                        placeholder="Password" name="password_admin">
+                                        placeholder="Password" name="password">
                                     <label for="floatingPassword">Password</label>
                                 </div>
                             </div>
@@ -233,7 +234,9 @@
         <script>alert('Login Gagal')</script>
     @endif
 
-
+    @if (session()->has('adminLoginError'))
+        <script>alert('Login Tidak Sah, Anda Bukan Admin')</script>
+    @endif
 
     <!-- Slider (jombootron) -->
     <section class="section-slide">

@@ -26,7 +26,7 @@ Route::get('/', [BookController::class, 'index'])->middleware('guest');
 Route::put('/dashboard/{id}', [MasterLayoutAdminController::class, 'update'])->name('profiladmin.update');
 
 //dashboard
-Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
+Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard')->middleware('checkRole:1');
 
 // kelola buku
 Route::get('/kelolabuku', [BookController::class, 'tampil'])->name('kelolabuku.tampil');
@@ -67,6 +67,7 @@ Route::post('/register', [RegisterController::class, 'store'])->middleware('gues
 
 // LOGIN ROUTE
 Route::post('/login', [LoginController::class, 'authenticate'])->middleware('guest');
+Route::post('/admin/login', [LoginController::class, 'admin_authenticate']);
 
 // LOGOUT ROUTE
 Route::post('/logout', [LogoutController::class, 'logout'])->middleware('auth');

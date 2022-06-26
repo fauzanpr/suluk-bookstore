@@ -69,11 +69,11 @@
 
 
             <li class="profile">
-                <div class="profile-details"  data-bs-toggle="modal" data-bs-target="#editprofil">
+                <div class="profile-details" data-bs-toggle="modal" data-bs-target="#editprofil">
                     @if (is_null(auth()->user()->photo))
-                    <img src="{{ asset('images/profile.png') }}" alt="pp">
+                        <img src="{{ asset('images/profile.png') }}" alt="pp">
                     @else
-                    <img src="{{ asset('storage/'.auth()->user()->photo) }}" alt="pp">
+                        <img src="{{ asset('storage/' . auth()->user()->photo) }}" alt="pp">
                     @endif
 
                     <div class="name_job">
@@ -81,7 +81,13 @@
                         <div class="job">Admin</div>
                     </div>
                 </div>
-                <i class="las la-sign-out-alt" id="log_out"></i>
+                <form action="/logout" method="POST">
+                    @csrf
+                    <button type="submit">
+                        <i class="las la-sign-out-alt" id="log_out"></i>
+                    </button>
+                </form>
+
             </li>
         </ul>
     </div>
@@ -98,35 +104,42 @@
     <form action="{{ route('profiladmin.update', auth()->user()->id) }}" method="POST" enctype="multipart/form">
         @csrf
         @method('PUT')
-        <div class="modal fade" id="editprofil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
+        <div class="modal fade" id="editprofil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="staticBackdropLabel">Edit Profile</h5>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    @if (is_null(auth()->user()->photo))
-                    <img src="{{ asset('images/profile.png') }}" class="rounded mx-auto d-block img-fluid mt-4 mb-2" alt="..." style="max-width: 200px;">
-                    @else
-                    <img src="{{ asset('storage/'.auth()->user()->photo) }}" class="rounded mx-auto d-block img-fluid mt-4 mb-2" alt="..." style="max-width: 200px;">
-                    @endif
-                    <div class="form-floating mb-3">
-                        <input type="file" class="form-control" id="floatingInput" name="photo">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Profile</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" name="name" value="{{ auth()->user()->name }}" required>
-                        <label for="floatingInput">Nama</label>
+                    <div class="modal-body">
+                        @if (is_null(auth()->user()->photo))
+                            <img src="{{ asset('images/profile.png') }}"
+                                class="rounded mx-auto d-block img-fluid mt-4 mb-2" alt="..."
+                                style="max-width: 200px;">
+                        @else
+                            <img src="{{ asset('storage/' . auth()->user()->photo) }}"
+                                class="rounded mx-auto d-block img-fluid mt-4 mb-2" alt="..."
+                                style="max-width: 200px;">
+                        @endif
+                        <div class="form-floating mb-3">
+                            <input type="file" class="form-control" id="floatingInput" name="photo">
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" name="name"
+                                value="{{ auth()->user()->name }}" required>
+                            <label for="floatingInput">Nama</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="floatingInput" name="telp"
+                                value="{{ auth()->user()->telp }}" required>
+                            <label for="floatingInput">Nomor Handphone</label>
+                        </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" name="telp" value="{{ auth()->user()->telp }}" required>
-                        <label for="floatingInput">Nomor Handphone</label>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-success">SIMPAN</button>
                     </div>
                 </div>
-                <div class="modal-footer">
-                  <button type="submit" class="btn btn-success">SIMPAN</button>
-                </div>
-              </div>
             </div>
         </div>
     </form>
