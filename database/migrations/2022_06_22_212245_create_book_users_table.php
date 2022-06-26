@@ -18,7 +18,7 @@ class CreateBookUsersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('book_id');
-            $table->foreignIdFor(Transaction::class)->nullable();
+            // $table->foreignIdFor(Transaction::class)->nullable();
             $table->integer('sub_item');
             $table->integer('sub_cost');
             $table->string('status');

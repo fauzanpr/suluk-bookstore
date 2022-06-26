@@ -115,7 +115,7 @@ class ChartController extends Controller
             ]);
         }
 
-        return redirect('/homepage');
+        return redirect()->route('checkout');
     }
 
     // public function checkout(Request $request)
@@ -142,7 +142,8 @@ class ChartController extends Controller
     //     return redirect('/homepage');
     // }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $sub_cost = Chart::find($request->id)->sub_cost;
         $sub_cost *= $request->num_product;
         Chart::find($request->id)->update([
