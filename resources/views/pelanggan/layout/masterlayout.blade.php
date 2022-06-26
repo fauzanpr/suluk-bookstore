@@ -49,7 +49,9 @@
 
 <body class="animsition">
     @if (session()->has('errorValidation'))
-        <script>alert('HARUS MINIMAL 1 DICENTANG DONGG')</script>
+        <script>
+            alert('HARUS MINIMAL 1 DICENTANG DONGG')
+        </script>
     @endif
 
     <!-- Header -->
@@ -139,7 +141,11 @@
         </div>
 
         <!-- Modal edit akun -->
-        <form action="" method="post">
+        @php
+            $image = auth()->user()->photo;
+        @endphp
+        <form action="/account/edit" method="post" enctype="multipart/form-data">
+            @csrf
             <div class="modal fade" id="editprofil" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -151,46 +157,60 @@
                         </div>
                         <div class="modal-body" style="max-height:350px !important;">
                             <div class="container mb-3 mt-3">
+                                @if ($image !== null)
+                                    <img src="storage/{{ $image }}" alt="Foto Profil" width="100px">
+                                @endif
                                 <div class="mb-3">
                                     <label for="profil_pelanggan1" class="form-label">Foto Profil</label>
-                                    <input type="file" class="form-control" id="profil_pelanggan1"
-                                        name="profil_pelanggan">
+                                    <input type="file" class="form-control" id="profil_pelanggan1" name="photo"
+                                        value="{{ auth()->user()->photo }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="nama_pelanggan1" class="form-label">Nama</label>
                                     <input type="text" class="form-control" id="nama_pelanggan1"
-                                        placeholder="eg : hadi kusumo" name="nama_pelanggan"
+                                        placeholder="eg : hadi kusumo" name="name"
                                         value="{{ auth()->user()->name }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="noHP_pelanggan1" class="form-label">Nomor Ponsel</label>
                                     <input type="number" class="form-control" id="noHP_pelanggan1"
-                                        placeholder="eg : 089620423487" name="noHP_pelanggan">
+                                        placeholder="eg : 089620423487" name="telp"
+                                        value="{{ auth()->user()->telp }}">
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="email_pelanggan1" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="email_pelanggan1"
-                                        placeholder="eg : name@gmail.com" name="email_pelanggan"
+                                        placeholder="eg : name@gmail.com" name="email"
                                         value="{{ auth()->user()->email }}">
-                                </div>
-                                <div class="mb-3">
+                                </div> --}}
+                                {{-- <div class="mb-3">
                                     <label for="password_pelanggan1" class="form-label">Password Akun</label>
                                     <input type="text" class="form-control" id="password_pelanggan1"
-                                        placeholder="eg : Sh8*Kmq" name="password_pelanggan">
-                                </div>
+                                        placeholder="eg : Sh8*Kmq" name="password" value="{{ auth()->user()->password }}">
+                                </div> --}}
                                 <div class="mb-3">
                                     <label for="provinsi1" class="form-label">Provinsi</label>
                                     <input type="text" class="form-control" id="provinsi1"
-                                        placeholder="eg : Jawa Timur" name="provinsi">
+                                        placeholder="eg : Jawa Timur" name="province"
+                                        value="{{ auth()->user()->province }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="kota1" class="form-label">Kota / Kabupaten</label>
                                     <input type="text" class="form-control" id="kota1"
-                                        placeholder="eg : Kota Malang" name="kota">
+                                        placeholder="eg : Kota Malang" name="city"
+                                        value="{{ auth()->user()->city }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="alamat"></textarea>
+                                    <label for="kecamatan" class="form-label">Kecamatan</label>
+                                    <input type="text" class="form-control" id="kecamatan"
+                                        placeholder="eg : Kecamatan Lowokwaru" name="district"
+                                        value="{{ auth()->user()->district }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="alamat" class="form-label">Alamat Lengkap</label>
+                                    <input type="text" class="form-control" id="alamat"
+                                        placeholder="Jalan Kembang Turi Gang 2" name="address"
+                                        value="{{ auth()->user()->address }}">
                                 </div>
                             </div>
                         </div>

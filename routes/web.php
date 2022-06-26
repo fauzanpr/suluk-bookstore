@@ -41,9 +41,11 @@ Route::get('/kelolatransaksi', [KelolaTransaksiController::class, 'index'])->nam
 
 // ROUTE FOR PELANGGAN
 Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage')->middleware('auth');
-
+Route::post('/account/edit', [HomepageController::class, 'edit'])->middleware('auth');
 
 Route::get('/chart', [ChartController::class, 'index'])->name('chart')->middleware('auth');
+Route::post('/chart', [ChartController::class, 'update'])->middleware('auth');
+
 Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 

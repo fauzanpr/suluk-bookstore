@@ -96,12 +96,13 @@
     </form>
 
     {{-- edit chart item modal --}}
-    <form method="post" action="">
+    <form method="post" action="/chart">
+        @csrf
         <div class="modal fade" id="editchartitem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Fresh Strawberries</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ $item->book->title }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -111,12 +112,15 @@
                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                 </div>
 
-                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1"
-                                    value="1">
+                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num_product"
+                                    value="{{ $item->sub_item }}">
 
                                 <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                 </div>
+
+                                <input class="mtext-104 cl3 txt-center num-product hidden" type="number" name="id"
+                                    value="{{ $item->id }}">
                             </div>
                         </div>
                     </div>
