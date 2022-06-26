@@ -1,6 +1,7 @@
 @extends('admin.layout.masterlayout')
 
 @section('content')
+
 <div class="container">
     <h5 class="overview-title mb-3 ps-0">
         <span class="border-3 border-bottom border-primary">List Data Transaksi</span>
@@ -27,6 +28,9 @@
                     </tr>
                 </thead>
                 <tbody>
+                    {{-- @php
+                    dd($transactions);
+                    @endphp --}}
                     @foreach ($transactions as $transaction)
                     <tr>
                         <td>{{ $transaction->id }}</td>
@@ -124,18 +128,28 @@
                                             <div class="container">
                                                 <div class="row mb-2 p-2"style="background-color: #4f46ba; color: #fff" >
                                                     <div class="col">Sampul</div>
+                                                    <div class="col">judul</div>
                                                     <div class="col">Harga Buku</div>
                                                     <div class="col">QTY</div>
                                                     <div class="col">Sub Total</div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <img src="{{ asset('images/product-01.jpg') }}" alt="" style="max-width: 60px;">
-                                                    </div>
-                                                    <div class="col">Harga Buku</div>
-                                                    <div class="col">QTY</div>
-                                                    <div class="col">Sub Total</div>
-                                                </div>
+                                                @foreach ($transactiondetil as $detil)
+                                                    @if($detil->transaction_id == $transaction->id)
+                                                        <div class="row mb-1">
+                                                            <div class="col">
+                                                                @if (is_null($detil->cover_photo))
+                                                                <img src="{{ asset('images/product-01.jpg') }}" alt="" style="max-width: 60px;">
+                                                                @else
+                                                                <img src="{{ asset('storage/'.$detil->cover_photo) }}" alt="" style="max-width: 60px;">
+                                                                @endif
+                                                            </div>
+                                                            <div class="col">{{ $detil->title }}</div>
+                                                            <div class="col">{{ $detil->price }}</div>
+                                                            <div class="col">{{ $detil->sub_item }}</div>
+                                                            <div class="col">{{ $detil->sub_cost }}</div>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
                                             </div>
                                         </div>
                                     </div>

@@ -18,14 +18,20 @@ class KelolaTransaksiController extends Controller
      */
     public function index()
     {
-        $transactions = Transaction::with('bookusertransaction')->orderBy('id', 'desc')->paginate(5);
+        $transactions = Transaction::with('user')->orderBy('id', 'desc')->paginate(5);
 
-        // $transactions = DB::table('transactions')
-        // ->join()
+        $transactiondetil = DB::table('transactions')
+            ->join('book_users', 'transactions.id', '=', 'book_users.transaction_id')
+            ->join('books', 'book_users.book_id', '=', 'books.id')
+            ->join('users', 'book_users.user_id', '=', 'users.id')
+            ->select('transactions.*', 'book_users.*', 'books.*', 'users.*')
+            ->get();
+
+
         $title = "kelolatransaksi";
 
 
-        return view('admin.kelolatransaksi', ['transactions' => $transactions, 'title' => $title]);
+        return view('admin.kelolatransaksi', ['transactions' => $transactions, 'title' => $title, 'transactiondetil' => $transactiondetil]);
     }
 
     /**

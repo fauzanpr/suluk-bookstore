@@ -78,9 +78,6 @@
                             <li>
                                 <a href="{{ route('checkout') }}">checkout</a>
                             </li>
-                            <li>
-                                <a href="{{ route('transaction') }}">Transaction</a>
-                            </li>
                         </ul>
                     </div>
 
@@ -92,6 +89,10 @@
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
                             data-notify="{{ $chart_count }}">
                             <a href="{{ route('chart') }}"><i class="zmdi zmdi-shopping-cart"></i></a>
+                        </div>
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                            data-notify="{{ $chart_count }}">
+                            <a href="{{ route('transaction') }}"><i class="las la-shopping-bag"></i></a>
                         </div>
                         <div class="dropdown icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">
                             <a class="p-2" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"

@@ -16,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($transaction as $t)
+                    @foreach ($transactions as $t)
                         <tr>
                             <th scope="row">{{ $t->id }}</th>
                             <td>{{ $t->transaction_date }}</td>
@@ -106,32 +106,33 @@
 
                                             <h6 class="mt-5 mb-4">DETAIL TRANSAKSI</h6>
                                             <!-- tabel detail buku -->
-                                            <div class="table-responsive">
-                                                <table class="table table-hover">
-                                                    <thead style="background-color: #4f46ba; color: #fff">
-                                                        <tr>
-                                                            <th scope="col">Sampul</th>
-                                                            <th scope="col">Harga Buku</th>
-                                                            <th scope="col">Quantity</th>
-                                                            <th scope="col">Sub Total</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-
-                                                        <tr>
-                                                            <td>
-                                                                <img src="img/buku.png" class="rounded mx-auto d-block img-fluid" alt="sampul"
-                                                                    style="max-width: 80px;">
-                                                            </td>
-                                                            <td>90000</td>
-                                                            <td>3</td>
-                                                            <td>280000</td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                                <!-- tabel end -->
+                                            <div class="container">
+                                                <div class="row mb-2 p-2"style="background-color: #4f46ba; color: #fff" >
+                                                    <div class="col">Sampul</div>
+                                                    <div class="col">judul</div>
+                                                    <div class="col">Harga Buku</div>
+                                                    <div class="col">QTY</div>
+                                                    <div class="col">Sub Total</div>
+                                                </div>
+                                                @foreach ($transactiondetil as $detil)
+                                                    @if($detil->transaction_id == $t->id)
+                                                        <div class="row mb-1">
+                                                            <div class="col">
+                                                                @if (is_null($detil->cover_photo))
+                                                                <img src="{{ asset('images/product-01.jpg') }}" alt="" style="max-width: 60px;">
+                                                                @else
+                                                                <img src="{{ asset('storage/'.$detil->cover_photo) }}" alt="" style="max-width: 60px;">
+                                                                @endif
+                                                            </div>
+                                                            <div class="col">{{ $detil->title }}</div>
+                                                            <div class="col">{{ $detil->price }}</div>
+                                                            <div class="col">{{ $detil->sub_item }}</div>
+                                                            <div class="col">{{ $detil->sub_cost }}</div>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
                                             </div>
+                                            <!-- tabel end -->
                                         </div>
                                     </div>
                                 </div>
