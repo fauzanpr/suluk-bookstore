@@ -69,11 +69,15 @@
 
 
             <li class="profile">
-                <div class="profile-details"  data-bs-toggle="modal"
-                data-bs-target="#editprofil">
-                    <img src="img/profile.png" alt="pp" />
+                <div class="profile-details"  data-bs-toggle="modal" data-bs-target="#editprofil">
+                    @if (is_null(auth()->user()->photo))
+                    <img src="{{ asset('images/profile.png') }}" alt="pp">
+                    @else
+                    <img src="{{ asset('storage/'.auth()->user()->photo) }}" alt="pp">
+                    @endif
+
                     <div class="name_job">
-                        <div class="name">Fauzan Pradana</div>
+                        <div class="name">{{ auth()->user()->name }}</div>
                         <div class="job">Admin</div>
                     </div>
                 </div>
@@ -84,11 +88,16 @@
 
     <!-- EDIT HERE -->
     <section class="home-section p-4">
+        {{-- @php
+        dd(auth()->user());
+        @endphp --}}
         @yield('content')
     </section>
 
     {{-- modal edit profile --}}
-    <form action="" method="post" enctype="multipart/form">
+    <form action="{{ route('profiladmin.update', auth()->user()->id) }}" method="POST" enctype="multipart/form">
+        @csrf
+        @method('PUT')
         <div class="modal fade" id="editprofil" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" >
             <div class="modal-dialog modal-dialog-scrollable">
               <div class="modal-content">
@@ -97,25 +106,21 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <img src="{{ asset('admin/img/logo.jpeg') }}" class="rounded mx-auto d-block img-fluid mt-4 mb-2" alt="..." style="max-width: 200px;">
+                    @if (is_null(auth()->user()->photo))
+                    <img src="{{ asset('images/profile.png') }}" class="rounded mx-auto d-block img-fluid mt-4 mb-2" alt="..." style="max-width: 200px;">
+                    @else
+                    <img src="{{ asset('storage/'.auth()->user()->photo) }}" class="rounded mx-auto d-block img-fluid mt-4 mb-2" alt="..." style="max-width: 200px;">
+                    @endif
                     <div class="form-floating mb-3">
-                        <input type="file" class="form-control" id="floatingInput" name="profil_admin">
+                        <input type="file" class="form-control" id="floatingInput" name="photo">
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" name="nama_admin" value="Fauzan Pradana">
+                        <input type="text" class="form-control" id="floatingInput" name="name" value="{{ auth()->user()->name }}" required>
                         <label for="floatingInput">Nama</label>
                     </div>
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingInput" name="noHp_admin" value="089620457389">
+                        <input type="text" class="form-control" id="floatingInput" name="telp" value="{{ auth()->user()->telp }}" required>
                         <label for="floatingInput">Nomor Handphone</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" name="email_admin" value="fauzanpr@gmail.com">
-                        <label for="floatingInput">Email</label>
-                    </div>
-                    <div class="form-floating mb-3">
-                        <input type="email" class="form-control" id="floatingInput" name="password_admin" value="Ykuch1rpZ^d">
-                        <label for="floatingInput">Password</label>
                     </div>
                 </div>
                 <div class="modal-footer">

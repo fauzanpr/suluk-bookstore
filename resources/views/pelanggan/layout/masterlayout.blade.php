@@ -94,11 +94,11 @@
                             <a href="{{ route('chart') }}"><i class="zmdi zmdi-shopping-cart"></i></a>
                         </div>
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                            data-notify="{{ $chart_count }}" title="Checkout">
+                            data-notify="{{ $checkout_count }}" title="Checkout">
                             <a href="{{ route('checkout') }}"><i class="las la-shopping-bag"></i></a>
                         </div>
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                            data-notify="{{ $chart_count }}" title="Transaction">
+                            data-notify="{{ $transaction_count }}" title="Transaction">
                             <a href="{{ route('transaction') }}"><i class="las la-file-invoice-dollar"></i></a>
                         </div>
                         <div class="dropdown icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">

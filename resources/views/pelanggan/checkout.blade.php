@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Shoping Cart -->
-    <form class="bg0 p-t-75 p-b-85 mt-5" method="POST" action="/transaction" enctype="multipart/form-data">
+    <form class="bg0 p-t-75 p-b-85 mt-5" method="POST" action="{{ route('transaction.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="container mt-5">
             <div class="container p-3">

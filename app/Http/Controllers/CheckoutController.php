@@ -20,10 +20,16 @@ class CheckoutController extends Controller
             'status' => 'tampil'
         ])->get();
         $chart = Chart::where('user_id', auth()->user()->id)->get();
+        $checkout = BookUser::where('user_id', auth()->user()->id)
+            ->where('status', '=', 'tampil')
+            ->get();
+        $transaction = Transaction::where('user_id', auth()->user()->id)->get();
         return view('pelanggan.checkout', [
             'title' => 'Checkout',
             'books' => $data_get,
             'chart_count' => count($chart),
+            'checkout_count' => count($checkout),
+            'transaction_count' => count($transaction),
         ]);
     }
 
@@ -33,7 +39,7 @@ class CheckoutController extends Controller
         $price_total = 0;
 
         $data_get = Chart::where('user_id', auth()->user()->id)->get();
-        $photo = $request->file('bukti_transfer')->store('bukti_transfer');
+        $photo = $request->file('bukti_transfer')->store('bukti_transfer', 'public');
         $book_user = BookUser::where('user_id', auth()->user()->id)->get();
 
         foreach ($book_user as $bu) {
@@ -65,10 +71,11 @@ class CheckoutController extends Controller
 
         $transaction = Transaction::where('user_id', auth()->user()->id)->get();
 
-        return view('pelanggan.transaction', [
-            'title' => 'Transaction',
-            'chart_count' => count($data_get),
-            'transaction' => $transaction,
-        ]);
+        // return view('pelanggan.transaction', [
+        //     'title' => 'Transaction',
+        //     'chart_count' => count($data_get),
+        //     'transaction' => $transaction,
+        // ]);
+        return redirect()->route('transaction');
     }
 }

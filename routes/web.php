@@ -15,13 +15,15 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KelolaTransaksiController;
 use App\Http\Controllers\DashboardAdminController;
+use App\Http\Controllers\MasterLayoutAdminController;
 
-Route::post('/transaction', [CheckoutController::class, 'StoreTransaction']);
+
 
 Route::get('/', [BookController::class, 'index'])->middleware('guest');
 
 
 // ROUTE FOR ADMIN
+Route::put('/dashboard/{id}', [MasterLayoutAdminController::class, 'update'])->name('profiladmin.update');
 
 //dashboard
 Route::get('/dashboard', [DashboardAdminController::class, 'index'])->name('dashboard');
@@ -55,6 +57,7 @@ Route::get('/chart', [ChartController::class, 'index'])->name('chart')->middlewa
 
 //transaction
 Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
+Route::post('/transaction', [CheckoutController::class, 'StoreTransaction'])->name('transaction.store');
 
 //checkout
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
