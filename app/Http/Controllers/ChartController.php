@@ -111,7 +111,7 @@ class ChartController extends Controller
                 'book_id' => $book->Book->id,
                 'sub_item' => $book->sub_item,
                 'sub_cost' => $book->sub_cost,
-                'status' => 'proses'
+                'status' => 'tampil'
             ]);
         }
 

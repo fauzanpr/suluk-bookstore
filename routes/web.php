@@ -15,7 +15,7 @@ use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\KelolaTransaksiController;
 
-Route::post('/totransaction', [CheckoutController::class, 'StoreTransaction']);
+Route::post('/transaction', [CheckoutController::class, 'StoreTransaction']);
 
 Route::get('/', [BookController::class, 'index'])->middleware('guest');
 // ROUTE FOR ADMIN

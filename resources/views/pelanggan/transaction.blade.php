@@ -44,6 +44,100 @@
 
                             </td>
                         </tr>
+                        <div class="modal fade" id="detailtransaksi{{ $t->id }}" tabindex="-1"
+                            aria-labelledby="exampleModalScrollableTitle" aria-hidden="true"
+                            style="max-height: 500px;margin-top: 10vh;">
+                            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalScrollableTitle">DETAIL TRANSAKSI</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+
+                                            <h6>BUKTI TRANSFER</h6>
+                                            <img src="storage/{{ $t->transfer_proof }}"
+                                                class="rounded mx-auto d-block img-fluid mb-5" alt="..."
+                                                style="max-width: 350px;">
+
+                                            <h6 class="mb-4">DATA TRANSAKSI</h6>
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-4">
+                                                    <p>ID Transaksi</p>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>: {{ $t->id }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-4">
+                                                    <p>Tgl Transaksi</p>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>: 26/06/2022</p>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-4">
+                                                    <p>Total Item</p>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>: {{ $t->item_total }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-4">
+                                                    <p>Total Harga</p>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>: {{ $t->price_total }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <div class="col-sm-4">
+                                                    <p>Status</p>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    <p>: {{ $t->transaction_status }}</p>
+                                                </div>
+                                            </div>
+
+                                            <h6 class="mt-5 mb-4">DETAIL TRANSAKSI</h6>
+                                            <!-- tabel detail buku -->
+                                            <div class="table-responsive">
+                                                <table class="table table-hover">
+                                                    <thead style="background-color: #4f46ba; color: #fff">
+                                                        <tr>
+                                                            <th scope="col">Sampul</th>
+                                                            <th scope="col">Harga Buku</th>
+                                                            <th scope="col">Quantity</th>
+                                                            <th scope="col">Sub Total</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                        <tr>
+                                                            <td>
+                                                                <img src="img/buku.png"
+                                                                    class="rounded mx-auto d-block img-fluid" alt="sampul"
+                                                                    style="max-width: 80px;">
+                                                            </td>
+                                                            <td>90000</td>
+                                                            <td>3</td>
+                                                            <td>280000</td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                                <!-- tabel end -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
 
                 </tbody>
@@ -53,96 +147,7 @@
 
     <!-- Modal detail Transaksi -->
 
-    <div class="modal fade" id="detailtransaksi{{ $t->id }}" tabindex="-1"
-        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true" style="max-height: 500px;margin-top: 10vh;">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">DETAIL TRANSAKSI</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
 
-                        <h6>BUKTI TRANSFER</h6>
-                        <img src="storage/{{ $t->transfer_proof }}" class="rounded mx-auto d-block img-fluid mb-5"
-                            alt="..." style="max-width: 350px;">
-
-                        <h6 class="mb-4">DATA TRANSAKSI</h6>
-                        <div class="mb-3 row">
-                            <div class="col-sm-4">
-                                <p>ID Transaksi</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p>: {{ $t->id }}</p>
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-sm-4">
-                                <p>Tgl Transaksi</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p>: 26/06/2022</p>
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-sm-4">
-                                <p>Total Item</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p>: {{ $t->item_total }}</p>
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-sm-4">
-                                <p>Total Harga</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p>: {{ $t->price_total }}</p>
-                            </div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-sm-4">
-                                <p>Status</p>
-                            </div>
-                            <div class="col-sm-8">
-                                <p>: {{ $t->transaction_status }}</p>
-                            </div>
-                        </div>
-
-                        <h6 class="mt-5 mb-4">DETAIL TRANSAKSI</h6>
-                        <!-- tabel detail buku -->
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead style="background-color: #4f46ba; color: #fff">
-                                    <tr>
-                                        <th scope="col">Sampul</th>
-                                        <th scope="col">Harga Buku</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Sub Total</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                    <tr>
-                                        <td>
-                                            <img src="img/buku.png" class="rounded mx-auto d-block img-fluid" alt="sampul"
-                                                style="max-width: 80px;">
-                                        </td>
-                                        <td>90000</td>
-                                        <td>3</td>
-                                        <td>280000</td>
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                            <!-- tabel end -->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Modal detail Transaksi end -->
 @endsection
