@@ -37,7 +37,9 @@ php artisan migrate:fresh --seed
 add FILESYSTEM_DRIVER=public
 
 ### Lets make link media on storage to public
+```
 php artisan storage:link
+```
 
 ### Run it :)
 You can run, using
