@@ -4,6 +4,7 @@
     {{-- @php
     $price_total = 0;
     @endphp --}}
+
     <form class="bg0 p-t-75 p-b-85 mt-5" action="/chart/checkout" method="POST">
         @csrf
         <div class="container">
@@ -29,8 +30,8 @@
                                 <tr class="table_row">
                                     <td>
                                         <input class="text-center me-5" type="checkbox" value="{{ $item->id }}"
-                                            name="id[{{ $i }}]" aria-label="..."
-                                            style="width: 50px !important;">
+                                            name="id[{{ $i }}]" aria-label="..." style="width: 50px !important;"
+                                            id="checkBtn">
                                     </td>
                                     <td>
                                         <div class="how-itemcart1">
@@ -50,7 +51,7 @@
                                     <td class="column-5">Rp{{ $total_price }}</td>
                                     <td class="column-5">
                                         <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#editchartitem">
+                                            data-bs-target="#editchartitem{{ $item->id }}">
                                             <i class="las la-edit"></i>
                                         </button>
                                         {{-- delete --}}
@@ -69,6 +70,47 @@
                                     </td>
                                 </tr>
                                 {{-- chart item end --}}
+                                {{-- edit chart item modal --}}
+                                <form method="post" action="/chart">
+                                    @csrf
+                                    <div class="modal fade" id="editchartitem{{$item->id}}" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered modal-sm">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                        {{ $item->book->title }}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="container mt-3 mb-3">
+                                                        <div class="wrap-num-product flex-w m-l-auto">
+                                                            <div
+                                                                class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                                <i class="fs-16 zmdi zmdi-minus"></i>
+                                                            </div>
+
+                                                            <input class="mtext-104 cl3 txt-center num-product"
+                                                                type="number" name="num_product"
+                                                                value="{{ $item->sub_item }}">
+
+                                                            <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                                <i class="fs-16 zmdi zmdi-plus"></i>
+                                                            </div>
+
+                                                            <input class="mtext-104 cl3 txt-center num-product hidden"
+                                                                type="number" name="id" value="{{ $item->id }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-success">simpan</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                                 @php
                                     // $price_total += $total_price;
                                     $i++;
@@ -99,12 +141,13 @@
     </form>
 
     {{-- edit chart item modal --}}
-    <form method="post" action="">
+    {{-- <form method="post" action="/chart">
+        @csrf
         <div class="modal fade" id="editchartitem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-sm">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Fresh Strawberries</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">{{ $item->book->title }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -114,12 +157,15 @@
                                     <i class="fs-16 zmdi zmdi-minus"></i>
                                 </div>
 
-                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1"
-                                    value="1">
+                                <input class="mtext-104 cl3 txt-center num-product" type="number" name="num_product"
+                                    value="{{ $item->sub_item }}">
 
                                 <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
                                     <i class="fs-16 zmdi zmdi-plus"></i>
                                 </div>
+
+                                <input class="mtext-104 cl3 txt-center num-product hidden" type="number" name="id"
+                                    value="{{ $item->id }}">
                             </div>
                         </div>
                     </div>
@@ -129,5 +175,20 @@
                 </div>
             </div>
         </div>
-    </form>
+    </form> --}}
+
+
+    {{-- <script type="text/javascript">
+        $(document).ready(function() {
+            $('#checkBtn').click(function() {
+                checked = $("input[type=checkbox]:checked").length;
+
+                if (checked == 0) {
+                    alert("You must check at least one checkbox.");
+                    return false;
+                }
+
+            });
+        });
+    </script> --}}
 @endsection

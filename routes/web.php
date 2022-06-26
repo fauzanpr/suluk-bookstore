@@ -16,7 +16,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\KelolaTransaksiController;
 use App\Http\Controllers\DashboardAdminController;
 
-Route::post('/totransaction', [CheckoutController::class, 'StoreTransaction']);
+Route::post('/transaction', [CheckoutController::class, 'StoreTransaction']);
 
 Route::get('/', [BookController::class, 'index'])->middleware('guest');
 
@@ -47,9 +47,11 @@ Route::put('/kelolatransaksi/{id}', [KelolaTransaksiController::class, 'update']
 
 // ROUTE FOR PELANGGAN
 Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage')->middleware('auth');
-
+Route::post('/account/edit', [HomepageController::class, 'edit'])->middleware('auth');
 
 Route::get('/chart', [ChartController::class, 'index'])->name('chart')->middleware('auth');
+Route::post('/chart', [ChartController::class, 'update'])->middleware('auth');
+
 Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction');
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout');
 

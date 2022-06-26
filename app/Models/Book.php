@@ -24,6 +24,7 @@ class Book extends Model
         return $this->belongsToMany(User::class);
     }
 
+
     public function transaction()
     {
         return $this->belongsTo(Transaction::class);

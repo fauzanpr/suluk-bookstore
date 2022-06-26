@@ -48,6 +48,11 @@
 </head>
 
 <body class="animsition">
+    @if (session()->has('errorValidation'))
+        <script>
+            alert('HARUS MINIMAL 1 DICENTANG DONGG')
+        </script>
+    @endif
 
     <!-- Header -->
     <header>
@@ -100,20 +105,50 @@
                                 <i class="zmdi zmdi-account zmd-fw"></i>
                             </a>
 
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                        data-bs-target="#editprofil">Edit Profile</a></li>
+                        <!-- Menu desktop -->
+                        <div class="menu-desktop">
+                            <ul class="main-menu">
                                 <li>
-                                    <form action="/logout" method="post">
-                                        @csrf
-                                        <button class="dropdown-item">Logout</button>
-                                    </form>
+                                    <a href="{{ route('homepage') }}">Home</a>
                                 </li>
-
+                                <li>
+                                    <a href="{{ route('checkout') }}">checkout</a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('transaction') }}">Transaction</a>
+                                </li>
                             </ul>
                         </div>
 
-                    </div>
+                        <!-- Icon header -->
+                        <div class="wrap-icon-header flex-w flex-r-m">
+                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
+                                <i class="zmdi zmdi-search"></i>
+                            </div>
+                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                                data-notify="{{ $chart_count }}">
+                                <a href="{{ route('chart') }}"><i class="zmdi zmdi-shopping-cart"></i></a>
+                            </div>
+                            <div class="dropdown icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">
+                                <a class="p-2" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                    <i class="zmdi zmdi-account zmd-fw"></i>
+                                </a>
+
+                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                            data-bs-target="#editprofil">Edit Profile</a></li>
+                                    <li>
+                                        <form action="/logout" method="post">
+                                            @csrf
+                                            <button class="dropdown-item">Logout</button>
+                                        </form>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </div>
                 </nav>
             </div>
         </div>
@@ -137,7 +172,11 @@
         </div>
 
         <!-- Modal edit akun -->
-        <form action="" method="post">
+        @php
+            $image = auth()->user()->photo;
+        @endphp
+        <form action="/account/edit" method="post" enctype="multipart/form-data">
+            @csrf
             <div class="modal fade" id="editprofil" tabindex="-1" aria-labelledby="exampleModalLabel"
                 aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -149,46 +188,60 @@
                         </div>
                         <div class="modal-body" style="max-height:350px !important;">
                             <div class="container mb-3 mt-3">
+                                @if ($image !== null)
+                                    <img src="storage/{{ $image }}" alt="Foto Profil" width="100px">
+                                @endif
                                 <div class="mb-3">
                                     <label for="profil_pelanggan1" class="form-label">Foto Profil</label>
-                                    <input type="file" class="form-control" id="profil_pelanggan1"
-                                        name="profil_pelanggan">
+                                    <input type="file" class="form-control" id="profil_pelanggan1" name="photo"
+                                        value="{{ auth()->user()->photo }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="nama_pelanggan1" class="form-label">Nama</label>
                                     <input type="text" class="form-control" id="nama_pelanggan1"
-                                        placeholder="eg : hadi kusumo" name="nama_pelanggan"
+                                        placeholder="eg : hadi kusumo" name="name"
                                         value="{{ auth()->user()->name }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="noHP_pelanggan1" class="form-label">Nomor Ponsel</label>
                                     <input type="number" class="form-control" id="noHP_pelanggan1"
-                                        placeholder="eg : 089620423487" name="noHP_pelanggan">
+                                        placeholder="eg : 089620423487" name="telp"
+                                        value="{{ auth()->user()->telp }}">
                                 </div>
-                                <div class="mb-3">
+                                {{-- <div class="mb-3">
                                     <label for="email_pelanggan1" class="form-label">Email</label>
                                     <input type="email" class="form-control" id="email_pelanggan1"
-                                        placeholder="eg : name@gmail.com" name="email_pelanggan"
+                                        placeholder="eg : name@gmail.com" name="email"
                                         value="{{ auth()->user()->email }}">
-                                </div>
-                                <div class="mb-3">
+                                </div> --}}
+                                {{-- <div class="mb-3">
                                     <label for="password_pelanggan1" class="form-label">Password Akun</label>
                                     <input type="text" class="form-control" id="password_pelanggan1"
-                                        placeholder="eg : Sh8*Kmq" name="password_pelanggan">
-                                </div>
+                                        placeholder="eg : Sh8*Kmq" name="password" value="{{ auth()->user()->password }}">
+                                </div> --}}
                                 <div class="mb-3">
                                     <label for="provinsi1" class="form-label">Provinsi</label>
                                     <input type="text" class="form-control" id="provinsi1"
-                                        placeholder="eg : Jawa Timur" name="provinsi">
+                                        placeholder="eg : Jawa Timur" name="province"
+                                        value="{{ auth()->user()->province }}">
                                 </div>
                                 <div class="mb-3">
                                     <label for="kota1" class="form-label">Kota / Kabupaten</label>
                                     <input type="text" class="form-control" id="kota1"
-                                        placeholder="eg : Kota Malang" name="kota">
+                                        placeholder="eg : Kota Malang" name="city"
+                                        value="{{ auth()->user()->city }}">
                                 </div>
                                 <div class="mb-3">
-                                    <label for="exampleFormControlTextarea1" class="form-label">Alamat Lengkap</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="alamat"></textarea>
+                                    <label for="kecamatan" class="form-label">Kecamatan</label>
+                                    <input type="text" class="form-control" id="kecamatan"
+                                        placeholder="eg : Kecamatan Lowokwaru" name="district"
+                                        value="{{ auth()->user()->district }}">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="alamat" class="form-label">Alamat Lengkap</label>
+                                    <input type="text" class="form-control" id="alamat"
+                                        placeholder="Jalan Kembang Turi Gang 2" name="address"
+                                        value="{{ auth()->user()->address }}">
                                 </div>
                             </div>
                         </div>

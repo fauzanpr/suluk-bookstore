@@ -141,4 +141,14 @@ class ChartController extends Controller
     //     DB::table('book_users')->delete($request->id);
     //     return redirect('/homepage');
     // }
+
+    public function update(Request $request) {
+        $sub_cost = Chart::find($request->id)->sub_cost;
+        $sub_cost *= $request->num_product;
+        Chart::find($request->id)->update([
+            'sub_item' => $request->num_product,
+            'sub_cost' => $sub_cost
+        ]);
+        return redirect('/chart');
+    }
 }

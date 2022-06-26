@@ -2,7 +2,7 @@
 
 @section('content')
     <!-- Shoping Cart -->
-    <form class="bg0 p-t-75 p-b-85 mt-5" method="POST" action="/totransaction" enctype="multipart/form-data">
+    <form class="bg0 p-t-75 p-b-85 mt-5" method="POST" action="/transaction" enctype="multipart/form-data">
         @csrf
         <div class="container mt-5">
             <div class="container p-3">
@@ -59,7 +59,6 @@
 
                 {{-- form insert data transaksi --}}
                 {{-- <form method="post" action="/totransaction" enctype="multipart/form-data"> --}}
-                    @csrf
                     <div class="col-sm-10 col-lg-7 col-xl-5 m-lr-auto m-b-50">
                         <div class="bor10 p-lr-40 p-t-30 p-b-40 m-l-63 m-r-40 m-lr-0-xl p-lr-15-sm">
                             <h4 class="mtext-109 cl2 p-b-30">
