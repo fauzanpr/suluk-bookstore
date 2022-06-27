@@ -83,16 +83,21 @@ class ChartController extends Controller
 
     public function add(Request $request, $id)
     {
-        $num_product = ($request->num_product);
-        $book = Book::find($id);
-        $sub_cost = ($book->price * $num_product);
-        Chart::create([
-            'user_id' => auth()->user()->id,
-            'book_id' => $id,
-            'sub_item' => $num_product,
-            'sub_cost' => $sub_cost,
-        ]);
-        return redirect('/homepage');
+        $stock = Book::find($id);
+        if ($request->num_product > $stock->stock) {
+            return redirect('homepage')->with('errorAddChart', 'Lebih dari Stock');
+        } else {
+            $num_product = ($request->num_product);
+            $book = Book::find($id);
+            $sub_cost = ($book->price * $num_product);
+            Chart::create([
+                'user_id' => auth()->user()->id,
+                'book_id' => $id,
+                'sub_item' => $num_product,
+                'sub_cost' => $sub_cost,
+            ]);
+            return redirect('/homepage');
+        }
     }
 
     public function checkout(Request $request)

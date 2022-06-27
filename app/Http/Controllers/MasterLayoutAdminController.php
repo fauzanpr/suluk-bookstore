@@ -87,7 +87,7 @@ class MasterLayoutAdminController extends Controller
             $image = $user->photo;
         }
 
-        dd($image);
+        // dd($image);
 
         $user->photo = $image;
 

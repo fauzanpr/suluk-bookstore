@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\DB;
+use App\Models\Book;
+
 
 
 
@@ -27,6 +29,9 @@ class KelolaTransaksiController extends Controller
             ->select('transactions.*', 'book_users.*', 'books.*', 'users.*')
             ->get();
 
+        // $jml = count($transactiondetil);
+
+        // dd($jml);
 
         $title = "kelolatransaksi";
 
@@ -89,6 +94,51 @@ class KelolaTransaksiController extends Controller
         $transaction = Transaction::find($id);
 
         $transaction->transaction_status = $request->transaction_status;
+
+        if ($transaction->transaction_status === 'success') {
+
+            $transactiondetil = DB::table('transactions')
+                ->join('book_users', 'transactions.id', '=', 'book_users.transaction_id')
+                ->join('books', 'book_users.book_id', '=', 'books.id')
+                ->join('users', 'book_users.user_id', '=', 'users.id')
+                ->select('transactions.*', 'book_users.*', 'books.*', 'users.*')
+                ->where('transactions.id', '=', $id)
+                ->get();
+
+            $i = count($transactiondetil);
+
+
+            for ($j = 0; $j < $i; $j++) {
+                $book[$j] = Book::find($transactiondetil[$j]->book_id);
+
+
+
+                $book[$j]->stock = $book[$j]->stock - $transactiondetil[$j]->sub_item;
+
+                $book[$j]->save();
+            }
+        } else {
+            $transactiondetil = DB::table('transactions')
+                ->join('book_users', 'transactions.id', '=', 'book_users.transaction_id')
+                ->join('books', 'book_users.book_id', '=', 'books.id')
+                ->join('users', 'book_users.user_id', '=', 'users.id')
+                ->select('transactions.*', 'book_users.*', 'books.*', 'users.*')
+                ->where('transactions.id', '=', $id)
+                ->get();
+
+            $i = count($transactiondetil);
+
+
+            for ($j = 0; $j < $i; $j++) {
+                $book[$j] = Book::find($transactiondetil[$j]->book_id);
+
+
+
+                $book[$j]->stock = $book[$j]->stock + $transactiondetil[$j]->sub_item;
+
+                $book[$j]->save();
+            }
+        }
 
 
         $transaction->save();

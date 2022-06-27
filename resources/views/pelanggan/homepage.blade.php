@@ -1,6 +1,11 @@
 @extends('pelanggan.layout.masterlayout')
 
 @section('content')
+    @if(session()->has('errorAddChart'))
+    <script>
+        alert('Item yang dipilih lebih dari stock')
+    </script>
+    @endif
     <!-- Slider (jombootron) -->
     <section class="section-slide">
         <div class="wrap-slick1">
