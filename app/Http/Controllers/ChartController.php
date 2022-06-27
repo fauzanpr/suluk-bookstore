@@ -17,10 +17,17 @@ class ChartController extends Controller
     public function index()
     {
         $data_get = Chart::where('user_id', auth()->user()->id)->get();
+        $checkout = BookUser::where('user_id', auth()->user()->id)
+            ->where('status', '=', 'tampil')
+            ->get();
+        $transaction = Transaction::where('user_id', auth()->user()->id)->get();
+
         return view('pelanggan.chart', [
             'title' => 'chart',
             'chart_items' => $data_get,
-            'chart_count' => count($data_get)
+            'chart_count' => count($data_get),
+            'checkout_count' => count($checkout),
+            'transaction_count' => count($transaction),
         ]);
     }
 
@@ -28,7 +35,7 @@ class ChartController extends Controller
     {
 
         DB::table('charts')->where('id', $id)->delete();
-        return redirect('/homepage');
+        return redirect('/chart');
     }
 
     // public function checkout(Request $request)
@@ -115,7 +122,7 @@ class ChartController extends Controller
             ]);
         }
 
-        return redirect('/homepage');
+        return redirect()->route('checkout');
     }
 
     // public function checkout(Request $request)
@@ -142,7 +149,8 @@ class ChartController extends Controller
     //     return redirect('/homepage');
     // }
 
-    public function update(Request $request) {
+    public function update(Request $request)
+    {
         $sub_cost = Chart::find($request->id)->sub_cost;
         $sub_cost *= $request->num_product;
         Chart::find($request->id)->update([

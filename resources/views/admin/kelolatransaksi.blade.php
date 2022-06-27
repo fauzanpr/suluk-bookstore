@@ -8,7 +8,7 @@
     </h5>
 
     <!-- btn cetak -->
-    <a class="d-grid gap-2 d-md-flex justify-content-md-end" href="{{ route('kelolatransaksi.cetak') }}" target="_blank">
+    <a class="d-grid gap-2 d-md-flex justify-content-md-end" href="{{ route('kelolatransaksi.cetak') }}" target="_blank" style="text-decoration: none">
         <button type="button" class="btn btn-danger mt-4"><i class="las la-print"> </i> Cetak Laporan</button>
     </a>
     <!-- btn cetak -->
@@ -42,9 +42,6 @@
                             <button class="btn btn-primary btn-sm" type="button" title="Edit"
                                 data-bs-toggle="modal" data-bs-target="#edittransaksi{{ $transaction->id }}">
                                 <i class="las la-edit"></i>
-                            </button>
-                            <button class="btn btn-danger btn-sm" type="button" title="Hapus">
-                                <i class="las la-trash-alt"></i>
                             </button>
                         </td>
                     </tr>

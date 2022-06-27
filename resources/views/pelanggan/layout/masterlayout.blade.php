@@ -78,13 +78,11 @@
                     <div class="menu-desktop">
                         <ul class="main-menu">
                             <li>
-                                <a href="{{ route('homepage') }}">Home</a>
-                            </li>
-                            <li>
-                                <a href="{{ route('checkout') }}">checkout</a>
+                                
                             </li>
                         </ul>
                     </div>
+
 
                     <!-- Icon header -->
                     <div class="wrap-icon-header flex-w flex-r-m">
@@ -92,12 +90,16 @@
                             <i class="zmdi zmdi-search"></i>
                         </div>
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                            data-notify="{{ $chart_count }}">
+                            data-notify="{{ $chart_count }}" title="Cart">
                             <a href="{{ route('chart') }}"><i class="zmdi zmdi-shopping-cart"></i></a>
                         </div>
                         <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                            data-notify="{{ $chart_count }}">
-                            <a href="{{ route('transaction') }}"><i class="las la-shopping-bag"></i></a>
+                            data-notify="{{ $checkout_count }}" title="Checkout">
+                            <a href="{{ route('checkout') }}"><i class="las la-shopping-bag"></i></a>
+                        </div>
+                        <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
+                            data-notify="{{ $transaction_count }}" title="Transaction">
+                            <a href="{{ route('transaction') }}"><i class="las la-file-invoice-dollar"></i></a>
                         </div>
                         <div class="dropdown icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">
                             <a class="p-2" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
@@ -105,50 +107,21 @@
                                 <i class="zmdi zmdi-account zmd-fw"></i>
                             </a>
 
-                        <!-- Menu desktop -->
-                        <div class="menu-desktop">
-                            <ul class="main-menu">
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                        data-bs-target="#editprofil">Edit Profile</a></li>
                                 <li>
-                                    <a href="{{ route('homepage') }}">Home</a>
+                                    <form action="/logout" method="post">
+                                        @csrf
+                                        <button class="dropdown-item">Logout</button>
+                                    </form>
                                 </li>
-                                <li>
-                                    <a href="{{ route('checkout') }}">checkout</a>
-                                </li>
-                                <li>
-                                    <a href="{{ route('transaction') }}">Transaction</a>
-                                </li>
+
                             </ul>
                         </div>
 
-                        <!-- Icon header -->
-                        <div class="wrap-icon-header flex-w flex-r-m">
-                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-l-22 p-r-11 js-show-modal-search">
-                                <i class="zmdi zmdi-search"></i>
-                            </div>
-                            <div class="icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10 icon-header-noti js-show-cart"
-                                data-notify="{{ $chart_count }}">
-                                <a href="{{ route('chart') }}"><i class="zmdi zmdi-shopping-cart"></i></a>
-                            </div>
-                            <div class="dropdown icon-header-item cl2 hov-cl1 trans-04 p-r-11 p-l-10">
-                                <a class="p-2" href="#" id="dropdownMenuLink" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    <i class="zmdi zmdi-account zmd-fw"></i>
-                                </a>
+                    </div>
 
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                            data-bs-target="#editprofil">Edit Profile</a></li>
-                                    <li>
-                                        <form action="/logout" method="post">
-                                            @csrf
-                                            <button class="dropdown-item">Logout</button>
-                                        </form>
-                                    </li>
-
-                                </ul>
-                            </div>
-
-                        </div>
                 </nav>
             </div>
         </div>

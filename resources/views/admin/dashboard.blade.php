@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col-12 mt-3 mb-1">
         <h4 class="text-uppercase">Dashboard Admin</h4>
-        <p>Hi! Fauzan Pradana</p>
+        <p>Hi! {{ auth()->user()->name }}</p>
     </div>
 </div>
 <div class="row">
@@ -17,7 +17,7 @@
                             <i class="las la-comments-dollar" style="font-size:5rem"></i>
                         </div>
                         <div class="media-body text-right align-self-center">
-                            <h3>Rp. {{ $sum }}</h3>
+                            <h3>Rp. {{ number_format($sum) }}</h3>
                             <span>Total Transaksi Bulan Ini</span>
                         </div>
                     </div>

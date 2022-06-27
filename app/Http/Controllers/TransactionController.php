@@ -6,6 +6,7 @@ use App\Models\Chart;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Transaction;
+use App\Models\BookUser;
 use Illuminate\Support\Facades\DB;
 
 
@@ -14,12 +15,12 @@ class TransactionController extends Controller
     public function index()
     {
 
-        $transactions = Transaction::with('user')
+        $transaction = Transaction::with('user')
             ->where('user_id', auth()->user()->id)
             ->orderBy('id', 'desc')
             ->paginate(5);
 
-        $transactiondetil = DB::table('transactions')
+        $details = DB::table('transactions')
             ->join('book_users', 'transactions.id', '=', 'book_users.transaction_id')
             ->join('books', 'book_users.book_id', '=', 'books.id')
             ->join('users', 'book_users.user_id', '=', 'users.id')
@@ -28,12 +29,19 @@ class TransactionController extends Controller
             ->get();
 
         $chart = Chart::where('user_id', auth()->user()->id)->get();
+        $checkout = BookUser::where('user_id', auth()->user()->id)
+            ->where('status', '=', 'tampil')
+            ->get();
+        $transaction_count = Transaction::where('user_id', auth()->user()->id)->get();
 
+        // redirect()->route('transaction')
         return view('pelanggan.transaction', [
             'title' => 'Checkout',
-            'transactions' => $transactions,
+            'transaction' => $transaction,
             'chart_count' => count($chart),
-            'transactiondetil' => $transactiondetil
+            'checkout_count' => count($checkout),
+            'transaction_count' => count($transaction_count),
+            'details' => $details,
         ]);
     }
 }

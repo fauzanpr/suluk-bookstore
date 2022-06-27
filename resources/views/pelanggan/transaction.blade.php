@@ -16,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($transactions as $t)
+                    @foreach ($transaction as $t)
                         <tr>
                             <th scope="row">{{ $t->id }}</th>
                             <td>{{ $t->transaction_date }}</td>
@@ -114,7 +114,7 @@
                                                     <div class="col">QTY</div>
                                                     <div class="col">Sub Total</div>
                                                 </div>
-                                                @foreach ($transactiondetil as $detil)
+                                                @foreach ($details as $detil)
                                                     @if($detil->transaction_id == $t->id)
                                                         <div class="row mb-1">
                                                             <div class="col">
@@ -145,6 +145,7 @@
                 </tbody>
             </table>
         </div>
+        {!! $transaction->links() !!}
     </div>
 
     
