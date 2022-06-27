@@ -90,8 +90,11 @@ class KelolaTransaksiController extends Controller
 
         $transaction->transaction_status = $request->transaction_status;
 
-
         $transaction->save();
+
+        // if ($transaction->transaction_status === 'success') {
+
+        // }
         return redirect()->route('kelolatransaksi.index')
             ->with('success', 'transaksi berhasil diupdate');
     }

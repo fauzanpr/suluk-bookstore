@@ -114,7 +114,6 @@ class MasterLayoutAdminController extends Controller
                 'name' => $request->name,
                 'telp' => $request->telp,
             ]);
-            return '<script>alert("KONDISI 1")</script>';
         } else {
             $photo = $request->file('photo')->store('Foto Profil', 'public');
             User::where('id', auth()->user()->id)->update([
@@ -122,7 +121,6 @@ class MasterLayoutAdminController extends Controller
                 'photo' => $photo,
                 'telp' => $request->telp
             ]);
-            return '<script>alert("KONDISI 2")</script>';
         }
         return redirect('/dashboard');
     }
