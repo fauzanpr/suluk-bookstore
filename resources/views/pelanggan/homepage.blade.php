@@ -5,6 +5,11 @@
         alert("anda bukan admin")
     </script>
 @endif
+@if (session()->has('errorAddChart'))
+    <script>
+        alert("STOK TIDAK CUKUP!")
+    </script>
+@endif
 
 @section('content')
     <!-- Slider (jombootron) -->
