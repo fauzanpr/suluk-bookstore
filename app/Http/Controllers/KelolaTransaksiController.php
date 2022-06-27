@@ -94,6 +94,24 @@ class KelolaTransaksiController extends Controller
 
         // if ($transaction->transaction_status === 'success') {
 
+        //     $transactiondetil = DB::table('transactions')
+        //         ->join('book_users', 'transactions.id', '=', 'book_users.transaction_id')
+        //         ->join('books', 'book_users.book_id', '=', 'books.id')
+        //         ->join('users', 'book_users.user_id', '=', 'users.id')
+        //         ->select('transactions.', 'book_users.', 'books.', 'users.')
+        //         ->where('transactions.id', '=', $id)
+        //         ->get();
+
+        //     dd($transactiondetil);
+        //     // $i = count($transactiondetil);
+
+
+        //     // for ($j = 0; $j < $i; $j++) {
+        //     //     $book_id = $transactiondetil[$j]->book_id;
+        //     //     Book::where('id', $book_id)->update([
+        //     //         'stock' =>
+        //     //     ]);
+        //     // }
         // }
         return redirect()->route('kelolatransaksi.index')
             ->with('success', 'transaksi berhasil diupdate');
