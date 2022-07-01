@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Book;
 use App\Models\Transaction;
+use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
+// use Barryvdh\DomPDF\PDF;
 
 
 
@@ -84,13 +87,13 @@ class KelolaTransaksiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $transaction = Transaction::find($id);
+    // public function update(Request $request, $id)
+    // {
+    //     $transaction = Transaction::find($id);
 
-        $transaction->transaction_status = $request->transaction_status;
+    //     $transaction->transaction_status = $request->transaction_status;
 
-        $transaction->save();
+    //     $transaction->save();
 
         // if ($transaction->transaction_status === 'success') {
 
@@ -113,9 +116,68 @@ class KelolaTransaksiController extends Controller
         //     //     ]);
         //     // }
         // }
+    //     return redirect()->route('kelolatransaksi.index')
+    //         ->with('success', 'transaksi berhasil diupdate');
+    // }
+
+    public function update(Request $request, $id)
+    {
+        $transaction = Transaction::find($id);
+
+        $transaction->transaction_status = $request->transaction_status;
+
+        if ($transaction->transaction_status === 'success') {
+
+            $transactiondetil = DB::table('transactions')
+                ->join('book_users', 'transactions.id', '=', 'book_users.transaction_id')
+                ->join('books', 'book_users.book_id', '=', 'books.id')
+                ->join('users', 'book_users.user_id', '=', 'users.id')
+                ->select('transactions.*', 'book_users.*', 'books.*', 'users.*')
+                ->where('transactions.id', '=', $id)
+                ->get();
+
+            $i = count($transactiondetil);
+
+
+            for ($j = 0; $j < $i; $j++) {
+                $book[$j] = Book::find($transactiondetil[$j]->book_id);
+
+
+
+                $book[$j]->stock = $book[$j]->stock - $transactiondetil[$j]->sub_item;
+
+                $book[$j]->save();
+            }
+        } else {
+            $transactiondetil = DB::table('transactions')
+                ->join('book_users', 'transactions.id', '=', 'book_users.transaction_id')
+                ->join('books', 'book_users.book_id', '=', 'books.id')
+                ->join('users', 'book_users.user_id', '=', 'users.id')
+                ->select('transactions.*', 'book_users.*', 'books.*', 'users.*')
+                ->where('transactions.id', '=', $id)
+                ->get();
+
+            $i = count($transactiondetil);
+
+
+            for ($j = 0; $j < $i; $j++) {
+                $book[$j] = Book::find($transactiondetil[$j]->book_id);
+
+
+
+                $book[$j]->stock = $book[$j]->stock + $transactiondetil[$j]->sub_item;
+
+                $book[$j]->save();
+            }
+        }
+
+
+        $transaction->save();
         return redirect()->route('kelolatransaksi.index')
             ->with('success', 'transaksi berhasil diupdate');
     }
+
+
 
     /**
      * Remove the specified resource from storage.
