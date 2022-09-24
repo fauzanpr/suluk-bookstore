@@ -38,63 +38,6 @@ class ChartController extends Controller
         return redirect('/chart');
     }
 
-    // public function checkout(Request $request)
-    // {
-    //     $books = BookUser::find($request->id);
-    //     // return dd(sizeof($books));
-    //     $item_total = 0;
-    //     $price_total = 0;
-    //     foreach ($books as $b) {
-    //         $item_total += $b->sub_item;
-    //         $price_total += $b->sub_cost;
-    //     }
-    //     $trans = Transaction::create([
-    //         'user_id' => auth()->user()->id,
-    //         'item_total' => $item_total,
-    //         'price_total' => $price_total,
-    //         'transaction_date' => Carbon::now(),
-    //         'transaction_status' => 'proses'
-    //     ]);
-
-    //     for ($i = 0; $i < sizeof($books); $i++) {
-    //         BookUserTransaction::create([
-    //             'book_user_id' => $request->id[$i],
-    //             'transaction_id' => $trans->id
-    //         ]);
-    //         DB::table('book_users')->delete($request->id[$i]);
-    //     }
-    //     return redirect('/homepage');
-    // }
-
-    // public function add(Request $request, $id)
-    // {
-    //     $num_product = ($request->num_product);
-    //     $book = Book::find($id);
-    //     $sub_cost = ($book->price * $num_product);
-    //     BookUser::create([
-    //         'user_id' => auth()->user()->id,
-    //         'book_id' => $id,
-    //         'sub_item' => $num_product,
-    //         'sub_cost' => $sub_cost,
-    //         'status' => 'proses',
-    //     ]);
-    //     return redirect('/homepage');
-    // }
-
-    // public function add(Request $request, $id)
-    // {
-    //     $num_product = ($request->num_product);
-    //     $book = Book::find($id);
-    //     $sub_cost = ($book->price * $num_product);
-    //     Chart::create([
-    //         'user_id' => auth()->user()->id,
-    //         'book_id' => $id,
-    //         'sub_item' => $num_product,
-    //         'sub_cost' => $sub_cost,
-    //     ]);
-    //     return redirect('/homepage');
-    // }
-
     public function add(Request $request, $id)
     {
         $stock = Book::find($id);
@@ -116,21 +59,10 @@ class ChartController extends Controller
 
     public function checkout(Request $request)
     {
-        // ddd($request->id);
         if ($request->id == null) {
             return redirect('chart')->with('errorValidation', 'Harus memilih salah satu');
         }
         $books = Chart::find($request->id);
-
-        // for ($i = 0; $i < sizeof($books); $i++) {
-        //     BookUser::create([
-        //         'user_id' => auth()->user()->id,
-        //         'book_id' => $books[$i]->Book->id,
-        //         'sub_item' => $books[$i]->sub_item,
-        //         'sub_cost' => $books[$i]->sub_cost,
-        //         'status' => 'proses'
-        //     ]);
-        // }
         foreach ($books as $book) {
             BookUser::create([
                 'user_id' => auth()->user()->id,
@@ -143,30 +75,6 @@ class ChartController extends Controller
 
         return redirect()->route('checkout');
     }
-
-    // public function checkout(Request $request)
-    // {
-    //     $books = BookUser::find($request->id);
-    //     $item_total = 0;
-    //     $price_total = 0;
-    //     foreach ($books as $b) {
-    //         $item_total += $b->sub_item;
-    //         $price_total += $b->sub_cost;
-    //     }
-    //     $trans = Transaction::create([
-    //         'user_id' => auth()->user()->id,
-    //         'item_total' => $item_total,
-    //         'price_total' => $price_total,
-    //         'transaction_date' => Carbon::now(),
-    //         'transaction_status' => 'proses'
-    //     ]);
-    //     BookUserTransaction::create([
-    //         'book_user_id' => auth()->user()->id,
-    //         'transaction_id' => $trans->id
-    //     ]);
-    //     DB::table('book_users')->delete($request->id);
-    //     return redirect('/homepage');
-    // }
 
     public function update(Request $request)
     {

@@ -44,14 +44,14 @@ Route::put('/kelolatransaksi/{id}', [KelolaTransaksiController::class, 'update']
 
 // ROUTE FOR PELANGGAN
 //homepage
-Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage')->middleware('checkRole:2');
-Route::post('/account/edit', [HomepageController::class, 'edit'])->middleware('checkRole:2');
+Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage')->middleware('auth');
+Route::post('/account/edit', [HomepageController::class, 'edit'])->middleware('auth');
 
 //chart
 Route::get('/chart', [ChartController::class, 'index'])->name('chart')->middleware('checkRole:2');
-Route::get('chart/delete/{id}', [ChartController::class, 'destroy'])->middleware('checkRole:2');
+Route::get('chart/delete/{id}', [ChartController::class, 'destroy'])->middleware('auth');
 Route::post('/chart/checkout', [ChartController::class, 'checkout'])->middleware('checkRole:2');
-Route::post('/chart/add/{id}', [ChartController::class, 'add'])->middleware('checkRole:2');
+Route::post('/chart/add/{id}', [ChartController::class, 'add'])->middleware('auth');
 
 //transaction
 Route::get('/transaction', [TransactionController::class, 'index'])->name('transaction')->middleware('auth');

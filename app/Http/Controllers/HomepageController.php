@@ -17,7 +17,6 @@ class HomepageController extends Controller
     public function index()
     {
         $title = 'homepage';
-        $books = Book::with('category')->get();
         $categories = Category::all();
         $chart_count = count(Chart::where('user_id', auth()->user()->id)->get());
         $checkout = BookUser::where('user_id', auth()->user()->id)
