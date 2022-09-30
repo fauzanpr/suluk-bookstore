@@ -76,10 +76,10 @@
                             </li>
 
                             <li>
-                                <a href="#">Login</a>
+                                <a href="#" data-id="login-button">Login</a>
                                 <ul class="sub-menu">
                                     <li><a href="" data-bs-toggle="modal"
-                                            data-bs-target="#loginpelanggan">Pelanggan</a></li>
+                                            data-bs-target="#loginpelanggan" data-id="login--pelanggan">Pelanggan</a></li>
                                     <li><a href="" data-bs-toggle="modal" data-bs-target="#loginadmin">Admin</a>
                                     </li>
                                 </ul>
@@ -610,8 +610,7 @@
                     Offline Store
                 </h3>
                 <div style="width: 100%"><iframe width="100%" height="300" frameborder="0" scrolling="no"
-                        marginheight="0" marginwidth="0"
-                        src="https://maps.google.com/maps?width=100%25&amp;height=300&amp;hl=en&amp;q=Jl.%20Anggraini%20IV%20No.11,%20Sukorame,%20Kec.%20Mojoroto,%20Kota%20Kediri,%20Jawa%20Timur%2064114+(Suluk%20Book%20Store)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a
+                        marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=100%25&amp;height=300&amp;hl=en&amp;q=Jl.%20Anggraini%20IV%20No.11,%20Sukorame,%20Kec.%20Mojoroto,%20Kota%20Kediri,%20Jawa%20Timur%2064114+(Suluk%20Book%20Store)&amp;t=&amp;z=16&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"><a
                             href="https://www.gps.ie/wearable-gps/">gps smartwatches</a></iframe></div>
             </div>
 
@@ -642,7 +641,7 @@
                     <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;
                     <script>
-                        document.write(ne w Date().getFullYear());
+                        document.write(new Date().getFullYear());
                     </script> All rights reserved | Made with <i class="fa fa-heart-o"
                         aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a> &amp;
                     distributed by <a href="https://themewagon.com" target="_blank">ThemeWagon</a>

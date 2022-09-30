@@ -10,9 +10,9 @@
 <form action="/login" method="post">
     @csrf
     <p>Email : </p>
-    <input type="email" name="email">
+    <input type="email" name="email" data-id="email">
     <p>Password : </p>
-    <input type="password" name="password" id="password">
+    <input type="password" name="password" id="password" data-id="password">
     <input type="submit">
 </form>
 </body>
